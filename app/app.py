@@ -3,12 +3,13 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    if request.method == 'POST':
-        if 'Ask' in request.form:
-            return 'Old Person Page'
-        elif 'Give' in request.form:
-            return 'Volunteer Page'
-    return render_template('public/index.html')
+    return 'hello world'
+    # if request.method == 'POST':
+    #     if 'Ask' in request.form:
+    #         return 'Old Person Page'
+    #     elif 'Give' in request.form:
+    #         return 'Volunteer Page'
+    # return render_template('public/index.html')
 
 
 
