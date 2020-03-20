@@ -3,7 +3,7 @@
   <h1> Helper Page </h1>
   {% for helpee in local_helpees %}
     <div><p><b>{{ helpee.phone }}</b> | {{ helpee.longitude }} | {{ helpee.latitude}}
-      <button formmethod="post" formaction="{{ url_for('main.coronavirus') }}/{{ helpee.phone }}" type="submit">Done</button>
+      <button formmethod="post" formaction="{{ url_for('main.remove_request') }}/{{ helpee.phone }}" type="submit">Done</button>
       </p>
     </div>
   {% endfor %}
