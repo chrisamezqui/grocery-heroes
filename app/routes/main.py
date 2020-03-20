@@ -25,8 +25,8 @@ def helper():
 def helpee():
     if request.method == 'POST':
         phone = request.form['phone']
-        longitude = int(request.form['longitude'])
-        latitude = int(request.form['latitude'])
+        longitude = float(request.form['longitude'])
+        latitude = float(request.form['latitude'])
 
         new_helpee = User(
             phone=phone,
@@ -55,3 +55,8 @@ def mod_db(phone):
             latitude=user.latitude
             )
     return json
+
+@main.route('/admin/reset', methods=['GET']) #change to delete later
+def reset_db():
+    User.query.delete()
+    return 'User table reset'
