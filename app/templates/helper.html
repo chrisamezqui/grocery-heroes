@@ -4,5 +4,7 @@
   {% for helpee in local_helpees %}
     <div><p><b>{{ helpee.phone }}</b> | {{ helpee.longitude }} | {{ helpee.latitude}}
       <button formmethod="POST" formaction="{{ url_for('main.helper') }}" type="submit">Done</button>
+      </p>
+    </div>
   {% endfor %}
 {% endblock %}
