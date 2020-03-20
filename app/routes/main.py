@@ -58,5 +58,6 @@ def mod_db(phone):
 
 @main.route('/admin/reset', methods=['GET']) #change to delete later
 def reset_db():
-    User.query.delete()
-    return 'User table reset'
+    num_rows_deleted = db.session.query(User).delete()
+    db.session.commit()
+    return 'number of rows deleted: {}'.format(num_rows_deleted)
