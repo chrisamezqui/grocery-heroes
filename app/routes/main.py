@@ -16,8 +16,8 @@ def helper():
 def helpee():
     if request.method == 'POST':
         phone = request.form['phone']
-        longitude = request.form['longitude']
-        latitude = request.form['latitude']
+        longitude = int(request.form['longitude'])
+        latitude = int(request.form['latitude'])
 
         new_helpee = User(
             phone=phone,
