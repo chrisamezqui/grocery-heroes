@@ -8,8 +8,14 @@ main = Blueprint('main', __name__)
 def index():
     return render_template('home.html')
 
-@main.route('/helper')
+@main.route('/helper', methods=['GET', 'POST'])
 def helper():
+    if request.method == 'POST':
+        phone = request.form['phone']
+        user = User.query.filter_by(phone=phone)
+        db.session.delete(user)
+        db.session.commit()
+
     local_helpees = User.query\
         .filter(User.longitude != None)\
         .filter(User.latitude != None)\
