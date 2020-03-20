@@ -1,4 +1,15 @@
 {% extends 'base.html' %}
 {% block content %}
 <h1> Helpee Page </h1>
+
+<form method="POST" action="{{ url_for('main.helpee') }}">
+  <label for="fname">Phone Number:</label><br>
+  <input type="text" id="phone" name="phone" value="(650)123-3456"><br>
+  <label for="lname">Longitude:</label><br>
+  <input type="text" id="longitude" name="longitude" value="420.69"><br>
+  <label for="lname">Latitude:</label><br>
+  <input type="text" id="latitude" name="latitude" value="3.1415"><br><br>
+  <input type="submit" value="Submit">
+</form>
+
 {% endblock %}
