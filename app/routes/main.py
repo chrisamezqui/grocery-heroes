@@ -10,7 +10,16 @@ def index():
 
 @main.route('/helper')
 def helper():
-    return render_template('helper.html')
+    local_helpees = User.query\
+        .filter(User.longitude != None)\
+        .filter(User.latitude != None)\
+        .all()
+
+    context = {
+        'local_helpees' : local_helpees
+    }
+
+    return render_template('helper.html', **context)
 
 @main.route('/helpee', methods=['GET', 'POST'])
 def helpee():
@@ -39,4 +48,10 @@ def mod_db(phone):
     if request.method == 'DELETE':
         db.session.delete(user)
         db.session.commit()
-    return jsonify(id=user.id, phone=user.phone, longitude=user.longitude, latitude=user.latitude)
+    json = jsonify(
+            id=user.id,
+            phone=user.phone,
+            longitude=user.longitude,
+            latitude=user.latitude
+            )
+    return json

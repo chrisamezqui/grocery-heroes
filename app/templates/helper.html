@@ -1,4 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1> Helper Page </h1>
+  <h1> Helper Page </h1>
+  {% for helpee in local_helpees %}
+    <div><p><b>{{ helpee.phone }}</b> | {{ helpee.longitude }} | {{ helpee.latitude}}</p></div>
+  {% endfor %}
 {% endblock %}
