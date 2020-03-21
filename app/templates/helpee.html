@@ -20,7 +20,24 @@
   <input type="submit" value="Submit">
 </form>
 
-<script src="../scripts/helpee.js"></script>
-
+<script>
+  alert('hello world')
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+        var longitude = position.coords.latitude;
+        var latitude = position.coords.longitude;
+    }, function() {
+      handleLocationError(true);
+    });
+  } else {
+    // Browser doesn't support Geolocation
+    handleLocationError(false);
+  }
+  function handleLocationError(browserHasGeolocation) {
+    alert(browserHasGeolocation ?
+                          'Error: The Geolocation service failed.' :
+                          'Error: Your browser doesn\'t support geolocation.');
+  }
+</script>
 
 {% endblock %}
