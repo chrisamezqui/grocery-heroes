@@ -60,7 +60,7 @@
           {% for helpee in local_helpees_partial %}
           {
             type: 'Feature',
-            geometry: {type: 'Point', coordinates: [helpee.longitude, helpee.latitude]},
+            geometry: {type: 'Point', coordinates: [{{ helpee.longitude }}, {{ helpee.latitude }}]},
             properties: {name: '{{ helpee.phone }}' }
           },
           {% endfor %}
