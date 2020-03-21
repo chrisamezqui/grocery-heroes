@@ -24,8 +24,8 @@
   window.addEventListener( "load", function () {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function(position) {
-          var longitude = position.coords.latitude;
-          var latitude = position.coords.longitude;
+          var latitude = position.coords.latitude;
+          var longitude = position.coords.longitude;
           function sendRegistrationData() {
             const XHR = new XMLHttpRequest();
             const FD = new FormData( form );
