@@ -2,8 +2,12 @@
 {% block content %}
   <h1> Helper Page </h1>
   {% for helpee in local_helpees %}
-    <div><p><b>{{ helpee.phone }}</b> | {{ helpee.longitude }} | {{ helpee.latitude}}
-      <button formmethod="post" formaction="{{ url_for('main.remove_request', phone=helpee.phone) }}" type="submit">Done</button>
+    <div>
+      <p>
+        <b>{{ helpee.phone }}</b> | {{ helpee.longitude }} | {{ helpee.latitude}}
+        <form method="POST" action="{{ url_for('main.remove_request', phone=helpee.phone) }}">
+          <button type="submit">Done</button>
+        </form>
       </p>
     </div>
   {% endfor %}
