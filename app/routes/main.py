@@ -25,7 +25,7 @@ def helper():
 
 @main.route('/helper/<string:phone>', methods=['POST'])
 def remove_request(phone):
-    user = User.query.filter_by(phone=phone)
+    user = User.query.filter_by(phone=phone).first()
     db.session.delete(user)
     db.session.commit()
 

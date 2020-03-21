@@ -4,8 +4,8 @@
   {% for helpee in local_helpees %}
     <div>
       <p>
-        <b>{{ helpee.phone }}</b> | {{ helpee.longitude }} | {{ helpee.latitude}}
-        <form method="POST" action="{{ url_for('main.remove_request', phone=helpee.phone) }}">
+        <b>{{ helpee.phone }}</b> | {{ helpee.longitude }} | {{ helpee.latitude}} <form
+        method="POST" action="{{ url_for('main.remove_request', phone=helpee.phone) }}">
           <button type="submit">Done</button>
         </form>
       </p>
