@@ -60,7 +60,7 @@ def map_view():
 
     context = {
         'local_helpees_partial' : local_helpees[:-1],
-        'local_helpee_final' : local_helpees[-1]
+        'local_helpee_final' : local_helpees[-1],
         'gmapi_key' : GOOGLE_MAPS_API_KEY
     }
 
