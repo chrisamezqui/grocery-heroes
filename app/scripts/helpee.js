@@ -1,4 +1,5 @@
 window.onload = function() {
+  alert("HELLO WORLD")
   // Try HTML5 geolocation.
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
