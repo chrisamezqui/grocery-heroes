@@ -21,23 +21,48 @@
 </form>
 
 <script>
-  alert('hello world')
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function(position) {
-        var longitude = position.coords.latitude;
-        var latitude = position.coords.longitude;
-    }, function() {
-      handleLocationError(true);
-    });
-  } else {
-    // Browser doesn't support Geolocation
-    handleLocationError(false);
-  }
-  function handleLocationError(browserHasGeolocation) {
-    alert(browserHasGeolocation ?
-                          'Error: The Geolocation service failed.' :
-                          'Error: Your browser doesn\'t support geolocation.');
-  }
+  window.addEventListener( "load", function () {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+          var longitude = position.coords.latitude;
+          var latitude = position.coords.longitude;
+      }, function() {
+        handleLocationError(true);
+      });
+    } else {
+      // Browser doesn't support Geolocation
+      handleLocationError(false);
+    }
+
+    function handleLocationError(browserHasGeolocation) {
+      alert(browserHasGeolocation ?
+                            'Error: The Geolocation service failed.' :
+                            'Error: Your browser doesn\'t support geolocation.');
+    }
+
+
+    function sendData() {
+      const XHR = new XMLHttpRequest();
+      const FD = new FormData( form );
+
+      XHR.addEventListener( "load", function(event) {
+        alert( event.target.responseText );
+      } );
+
+      XHR.addEventListener( "error", function( event ) {
+        alert( 'Oops! Something went wrong.' );
+      } );
+
+      XHR.open( "POST", "{{ url_for('main.helpee') }}" );
+      XHR.send( FD );
+    }
+    let form = document.getElementById( "registrationForm" );
+    form.addEventListener( "submit", function ( event ) {
+      event.preventDefault();
+      sendData();
+    } );
+  });
+
 </script>
 
 {% endblock %}
