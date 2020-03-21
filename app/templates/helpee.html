@@ -26,6 +26,30 @@
       navigator.geolocation.getCurrentPosition(function(position) {
           var longitude = position.coords.latitude;
           var latitude = position.coords.longitude;
+          function sendRegistrationData() {
+            const XHR = new XMLHttpRequest();
+            const FD = new FormData( form );
+            FD.append("longitude", longitude)
+            FD.append("latitude", latitude)
+            console.log(FD)
+
+            XHR.addEventListener( "load", function(event) {
+              alert( event.target.responseText );
+            } );
+
+            XHR.addEventListener( "error", function( event ) {
+              alert( 'Oops! Something went wrong.' );
+            } );
+
+            XHR.open( "POST", "{{ url_for('main.helpee') }}" );
+            XHR.send( FD );
+          }
+          let form = document.getElementById( "registrationForm" );
+          form.addEventListener( "submit", function ( event ) {
+            event.preventDefault();
+            sendRegistrationData();
+          } );
+
       }, function() {
         handleLocationError(true);
       });
@@ -39,33 +63,7 @@
                             'Error: The Geolocation service failed.' :
                             'Error: Your browser doesn\'t support geolocation.');
     }
-
-
-    function sendRegistrationData() {
-      const XHR = new XMLHttpRequest();
-      const FD = new FormData( form );
-      FD.append("longitude", longitude)
-      FD.append("latitude", latitude)
-      console.log(FD)
-
-      XHR.addEventListener( "load", function(event) {
-        alert( event.target.responseText );
-      } );
-
-      XHR.addEventListener( "error", function( event ) {
-        alert( 'Oops! Something went wrong.' );
-      } );
-
-      XHR.open( "POST", "{{ url_for('main.helpee') }}" );
-      XHR.send( FD );
-    }
-    let form = document.getElementById( "registrationForm" );
-    form.addEventListener( "submit", function ( event ) {
-      event.preventDefault();
-      sendRegistrationData();
-    } );
   });
-
 </script>
 
 {% endblock %}
