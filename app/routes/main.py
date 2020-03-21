@@ -76,6 +76,7 @@ def map_view():
             'helpees_exist' : False,
             'gmapi_key' : GOOGLE_MAPS_API_KEY
         }
+    print(context)
     return render_template('map.html', **context)
 
 ##REST API FOR ADMIN (TESTING PURPOSES)##
