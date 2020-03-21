@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang='en'>
   <head>
     <title>Grocery Heroes Map View</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
@@ -61,7 +61,7 @@
           {
             type: 'Feature',
             geometry: {type: 'Point', coordinates: [helpee.longitude, helpee.latitude]},
-            properties: {name: {{ helpee.phone }}}
+            properties: {name: '{{ helpee.phone }}' }
           },
           {% endfor %}
           {
