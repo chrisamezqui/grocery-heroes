@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for, jsonify
 from app.extensions import db
 from app.models import User
+from app.keys import *
 
 main = Blueprint('main', __name__)
 
@@ -49,6 +50,21 @@ def helpee():
         db.session.commit()
 
     return render_template('helpee.html')
+
+@main.route('/helper/map')
+def map_view():
+    local_helpees = User.query\
+        .filter(User.longitude != None)\
+        .filter(User.latitude != None)\
+        .all()
+
+    context = {
+        'local_helpees_partial' : local_helpees[:-1],
+        'local_helpee_final' : local_helpees[-1]
+        'gmapi_key' : GOOGLE_MAPS_API_KEY
+    }
+
+    return render_template('map.html', **context)
 
 ##REST API FOR ADMIN (TESTING PURPOSES)##
 @main.route('/admin/<string:phone>', methods=['GET', 'DELETE'])
