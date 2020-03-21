@@ -50,7 +50,7 @@ def helpee():
 
     return render_template('helpee.html')
 
-##REST API FOR ADMIN##
+##REST API FOR ADMIN (TESTING PURPOSES)##
 @main.route('/admin/<string:phone>', methods=['GET', 'DELETE'])
 def mod_db(phone):
     user = User.query.filter_by(phone=phone).first()
