@@ -50,21 +50,32 @@
           handleLocationError(false, infoWindow, map.getCenter());
         }
 
-        var marker;
-        {% for helpee in local_helpees %}
-        marker = new google.maps.Marker({
+        // var markers = [];
+        var marker = new google.maps.Marker({
           position: {lat: {{ helpee.latitude }}, lng:{{ helpee. longitude }}},
           map: map,
           title: '{{ helpee.phone }}'
 
         })
-        marker.addListener('click', function() {
-          map.setCenter(marker.getPosition());
-          var infowindow = new google.maps.InfoWindow({
-            content: marker.getTitle()
-          })
-          infowindow.open(map, marker);
-        });
+        // markers.push(marker)
+
+        var contentString = marker.getTitle();
+        var infowindow = new google.maps.InfoWindow();
+        (function(marker,content,infowindow) {
+            google.maps.event.addListener(marker,'click', function() {
+                infowindow.setContent(content);
+                infowindow.open(map, marker);
+            });
+        })(marker,contentString,infowindow);
+
+        //
+        // marker.addListener('click', function() {
+        //   map.setCenter(marker.getPosition());
+        //   var infowindow = new google.maps.InfoWindow({
+        //     content: marker.getTitle()
+        //   })
+        //   infowindow.open(map, marker);
+        // });
         marker.setMap(map)
         {% endfor %}
 
