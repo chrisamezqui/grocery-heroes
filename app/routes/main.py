@@ -58,24 +58,28 @@ def map_view():
         .filter(User.latitude != None)\
         .all()
 
-    if len(local_helpees) > 1:
-        context = {
-            'local_helpees_partial' : local_helpees[:-1],
-            'local_helpee_final' : local_helpees[-1],
-            'helpees_exist' : True,
-            'gmapi_key' : GOOGLE_MAPS_API_KEY
-        }
-    elif len(local_helpees) == 1:
-        context = {
-            'local_helpee_final' : local_helpees[0],
-            'helpees_exist' : True,
-            'gmapi_key' : GOOGLE_MAPS_API_KEY
-        }
-    else:
-        context = {
-            'helpees_exist' : False,
-            'gmapi_key' : GOOGLE_MAPS_API_KEY
-        }
+    # if len(local_helpees) > 1:
+    #     context = {
+    #         'local_helpees_partial' : local_helpees[:-1],
+    #         'local_helpee_final' : local_helpees[-1],
+    #         'helpees_exist' : True,
+    #         'gmapi_key' : GOOGLE_MAPS_API_KEY
+    #     }
+    # elif len(local_helpees) == 1:
+    #     context = {
+    #         'local_helpee_final' : local_helpees[0],
+    #         'helpees_exist' : True,
+    #         'gmapi_key' : GOOGLE_MAPS_API_KEY
+    #     }
+    # else:
+    #     context = {
+    #         'helpees_exist' : False,
+    #         'gmapi_key' : GOOGLE_MAPS_API_KEY
+    #     }
+    contect = {
+        'local_helpees' : local_helpees,
+        'gmapi_key' : GOOGLE_MAPS_API_KEY
+    }
     return render_template('map.html', **context)
 
 ##REST API FOR ADMIN (TESTING PURPOSES)##
