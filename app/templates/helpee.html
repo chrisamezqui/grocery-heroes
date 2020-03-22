@@ -34,11 +34,10 @@
             console.log(FD)
 
             XHR.addEventListener( "load", function(event) {
-              alert( event.target.responseText );
             } );
 
             XHR.addEventListener( "error", function( event ) {
-              alert( 'Oops! Something went wrong.' );
+              alert( 'Oops! Something went wrong. :o' );
             } );
 
             XHR.open( "POST", "{{ url_for('main.helpee') }}" );
