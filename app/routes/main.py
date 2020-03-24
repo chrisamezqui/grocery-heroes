@@ -24,7 +24,7 @@ def helper():
 
     return render_template('helper.html', **context)
 
-@main.route('/helper/map/<string:phone>', methods=['POST'])
+@main.route('/helper/map/<string:phone>', methods=['DELETE'])
 def remove_request(phone):
     user = User.query.filter_by(phone=phone).first()
     db.session.delete(user)

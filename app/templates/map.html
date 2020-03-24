@@ -78,7 +78,7 @@
           infoWindow.open(map, this);
           doneButtonAction = function() {
             this.setMap(null);
-            xmlhttp.open("DELETE", {{ url_for('main.remove_request')}}, true);
+            xmlhttp.open("DELETE", {{ url_for('main.remove_request', phone=helpee.phone)}}, true);
           };
         });
         marker.setMap(map);
