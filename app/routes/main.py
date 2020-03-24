@@ -24,13 +24,13 @@ def helper():
 
     return render_template('helper.html', **context)
 
-@main.route('/helper/<string:phone>', methods=['POST'])
+@main.route('/helper/map/<string:phone>', methods=['POST'])
 def remove_request(phone):
     user = User.query.filter_by(phone=phone).first()
     db.session.delete(user)
     db.session.commit()
 
-    return redirect(url_for('main.helper'))
+    # return redirect(url_for('main.helper'))
 
 
 @main.route('/helpee', methods=['GET', 'POST'])
@@ -57,7 +57,7 @@ def map_view():
         .filter(User.longitude != None)\
         .filter(User.latitude != None)\
         .all()
-        
+
     context = {
         'local_helpees' : local_helpees,
         'gmapi_key' : GOOGLE_MAPS_API_KEY
