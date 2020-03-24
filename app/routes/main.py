@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, request, redirect, url_for, jsonif
 from app.extensions import db
 from app.models import User
 from app.keys import *
+from sqlalchemy import and_
 
 main = Blueprint('main', __name__)
 
@@ -24,9 +25,11 @@ def helper():
 
     return render_template('helper.html', **context)
 
-@main.route('/helper/map/<string:phone>', methods=['DELETE'])
+@main.route('/helper/map/', methods=['DELETE'])
 def remove_request(phone):
-    user = User.query.filter_by(phone=phone).first()
+    longitude = float(request.form['longitude'])
+    latitude = float(request.form['latitude'])
+    user = User.query.filter(and_(longitude=longitude, latitude=latitude)).first()
     db.session.delete(user)
     db.session.commit()
 
