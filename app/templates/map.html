@@ -67,6 +67,7 @@
 
         marker.addListener('click', function() {
           map.setCenter(this.getPosition());
+          infoWindow.setContent(contentString)
           infowindow.open(map, this);
         });
         marker.setMap(map);
