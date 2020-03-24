@@ -46,6 +46,8 @@
           handleLocationError(false, infoWindow, map.getCenter());
         }
 
+        // For server updates.
+        var xmlhttp;
         if (window.XMLHttpRequest) {
            // code for modern browsers
            xmlhttp = new XMLHttpRequest();
@@ -55,6 +57,7 @@
         }
         var doneButtonAction = function() { return; };
 
+        // Place pins on map.
         {% for helpee in local_helpees %}
         var marker = new google.maps.Marker({
           position: {lat: {{ helpee.latitude }}, lng:{{ helpee. longitude }}},
@@ -75,6 +78,7 @@
           infoWindow.open(map, this);
           doneButtonAction = function() {
             this.setMap(null);
+            xmlhttp.open("DELETE", {{ url_for('main.remove_request')}}, true);
           };
         });
         marker.setMap(map);
