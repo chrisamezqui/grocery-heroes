@@ -75,14 +75,14 @@
           map: map,
           title: '{{ helpee.phone }}'
 
-        })
+        });
         marker.addListener('click', function() {
 
           // map.setCenter(marker.getPosition());
 
           infowindow.open(map, marker);
         });
-        marker.setMap(map)
+        marker.setMap(map);
         {% endfor %}
 
       }
