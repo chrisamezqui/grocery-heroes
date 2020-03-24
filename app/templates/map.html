@@ -46,6 +46,15 @@
           handleLocationError(false, infoWindow, map.getCenter());
         }
 
+        if (window.XMLHttpRequest) {
+           // code for modern browsers
+           xmlhttp = new XMLHttpRequest();
+         } else {
+           // code for old IE browsers
+           xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        var doneButtonAction = function() { return; };
+
         {% for helpee in local_helpees %}
         var marker = new google.maps.Marker({
           position: {lat: {{ helpee.latitude }}, lng:{{ helpee. longitude }}},
@@ -64,7 +73,7 @@
                      '</div>';
           infoWindow.setContent(contentString);
           infoWindow.open(map, this);
-          function doneButtonAction() {
+          doneButtonAction = function() {
             this.setMap(null);
           }
         });
