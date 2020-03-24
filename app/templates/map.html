@@ -57,16 +57,17 @@
           title: 'Somebody could use some help here!'
 
         });
-        var contentString = '<div id="helperNotification">'+
-                   '<h1>Interested in helping out?</h1>'+
-                   '<p>Call <b>{{ helpee.phone }}</b> and ask what they need!'+
-                   'After confirming, be sure to click on the \'Done\' button'+
-                   'to remove the recipient\'s pin from the map.</p>'+
-                   '<button id="doneButton">Done</button>'+
-                   '</div>';
+
 
         marker.addListener('click', function() {
           map.setCenter(this.getPosition());
+          let contentString = '<div id="helperNotification">'+
+                     '<h1>Interested in helping out?</h1>'+
+                     '<p>Call <b>{{ helpee.phone }}</b> and ask what they need!'+
+                     'After confirming, be sure to click on the \'Done\' button'+
+                     'to remove the recipient\'s pin from the map.</p>'+
+                     '<button id="doneButton">Done</button>'+
+                     '</div>';
           infoWindow.setContent(contentString)
           infowindow.open(map, this);
         });
