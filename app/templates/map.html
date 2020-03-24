@@ -55,7 +55,7 @@
            // code for old IE browsers
            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
-        var doneButtonAction = function() { return; };
+        // var doneButtonAction = function() { return; };
 
         // Place pins on map.
         {% for helpee in local_helpees %}
@@ -72,19 +72,22 @@
                      '<p>Call <b>{{ helpee.phone }}</b> and ask what they need! '+
                      'After confirming, be sure to click on the \'Done\' button '+
                      'to remove the recipient\'s pin from the map.</p>'+
-                     '<button id="doneButton">Done</button>'+
+                     '<button onlcik="doneButtonAction" id="doneButton">Done</button>'+
                      '</div>';
           infoWindow.setContent(contentString);
           infoWindow.open(map, this);
-          var curMarker = this;
-          document.getElementById("doneButton").addEventListener("click", function() {
-            curMarker.setMap(null);
-            xmlhttp.open("DELETE", "{{ url_for('main.remove_request', phone=helpee.phone)}}", true);
-          });
+          // var curMarker = this;
+          // document.getElementById("doneButton").addEventListener("click", function() {
+            // curMarker.setMap(null);
+            // xmlhttp.open("DELETE", "{{ url_for('main.remove_request', phone=helpee.phone)}}", true);
+          // });
         });
         marker.setMap(map);
         {% endfor %}
-
+      }
+      function doneButtonAction() {
+        alert('hello world');
+        return;
       }
 
       function handleLocationError(browserHasGeolocation, infoWindow, pos) {
