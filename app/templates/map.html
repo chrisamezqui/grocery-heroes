@@ -51,21 +51,23 @@
           position: {lat: {{ helpee.latitude }}, lng:{{ helpee. longitude }}},
           map: map,
           title: 'Somebody could use some help here!'
-
         });
-
 
         marker.addListener('click', function() {
           map.setCenter(this.getPosition());
           let contentString = '<div id="helperNotification">'+
                      '<h1>Interested in helping out?</h1>'+
-                     '<p>Call <b>{{ helpee.phone }}</b> and ask what they need!'+
-                     'After confirming, be sure to click on the \'Done\' button'+
+                     '<p>Call <b>{{ helpee.phone }}</b> and ask what they need! '+
+                     'After confirming, be sure to click on the \'Done\' button '+
                      'to remove the recipient\'s pin from the map.</p>'+
-                     '<button id="doneButton">Done</button>'+
+                     '<button onclick="doneButtonAction()" id="doneButton">Done</button>'+
                      '</div>';
           infoWindow.setContent(contentString);
           infoWindow.open(map, this);
+          function doneButtonAction() {
+            this.setMap(null);
+            this = null; 
+          }
         });
         marker.setMap(map);
         {% endfor %}
@@ -79,6 +81,7 @@
                               'Error: Your browser doesn\'t support geolocation.');
         infoWindow.open(map);
       }
+
     </script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key={{ gmapi_key }}&callback=initMap">
