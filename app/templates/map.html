@@ -46,10 +46,6 @@
           handleLocationError(false, infoWindow, map.getCenter());
         }
 
-
-         var infowindow = new google.maps.InfoWindow({
-           content: contentString
-         })
         {% for helpee in local_helpees %}
         var marker = new google.maps.Marker({
           position: {lat: {{ helpee.latitude }}, lng:{{ helpee. longitude }}},
@@ -68,7 +64,7 @@
                      'to remove the recipient\'s pin from the map.</p>'+
                      '<button id="doneButton">Done</button>'+
                      '</div>';
-          infoWindow.setContent(contentString)
+          infoWindow.setContent(contentString);
           infowindow.open(map, this);
         });
         marker.setMap(map);
