@@ -12,8 +12,6 @@ def index():
 
 @main.route('/helper')
 def helper():
-
-
     local_helpees = User.query\
         .filter(User.longitude != None)\
         .filter(User.latitude != None)\
@@ -24,20 +22,6 @@ def helper():
     }
 
     return render_template('helper.html', **context)
-
-@main.route('/helper/map', methods=['DELETE'])
-def remove_request():
-    print(request.form)
-    print(request.form['longitude'])
-    longitude = float(request.form['longitude'])
-    latitude = float(request.form['latitude'])
-    user = User.query.filter(and_(User.longitude==longitude, User.latitude==latitude)).first()
-    db.session.delete(user)
-    db.session.commit()
-
-    return ''
-    # return redirect(url_for('main.helper'))
-
 
 @main.route('/helpee', methods=['GET', 'POST'])
 def helpee():
@@ -61,8 +45,17 @@ def helpee():
 
     return render_template('helpee.html')
 
-@main.route('/helper/map')
+@main.route('/helper/map', methods=['GET', 'DELETE'])
 def map_view():
+    if request.method == 'DELETE':
+        longitude = float(request.form['longitude'])
+        latitude = float(request.form['latitude'])
+        user = User.query.filter(and_(User.longitude==longitude, User.latitude==latitude)).first()
+        db.session.delete(user)
+        db.session.commit()
+
+        return ''
+
     local_helpees = User.query\
         .filter(User.longitude != None)\
         .filter(User.latitude != None)\
@@ -73,6 +66,15 @@ def map_view():
         'gmapi_key' : GOOGLE_MAPS_API_KEY
     }
     return render_template('map.html', **context)
+
+# @main.route('/helper/map/marker')
+# def verify_marker():
+#     longitude = float(request.form['longitude'])
+#     latitude = float(request.form['latitude'])
+#     user = User.query.filter(and_(User.longitude==longitude, User.latitude==latitude)).first()
+#
+#     return
+
 
 ##REST API FOR ADMIN (TESTING PURPOSES)##
 @main.route('/admin/<string:phone>', methods=['GET', 'DELETE'])

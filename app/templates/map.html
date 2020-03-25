@@ -21,7 +21,7 @@
   <body>
     <div id="map"></div>
     <script>
-      var map, infoWindow, xmlhttp, activeMarker;
+      var map, infoWindow, xmlhttp, activeMarker, helpeePhoneMap;
       // For server updates.
       if (window.XMLHttpRequest) {
          // code for modern browsers
@@ -37,6 +37,7 @@
           zoom: 13
         });
         infoWindow = new google.maps.InfoWindow;
+        helpeeMap = new Map();
 
         // Try HTML5 geolocation.
         if (navigator.geolocation) {
@@ -57,12 +58,27 @@
 
         infoWindow.addListener('domready', function() {
           document.getElementById("doneButton").addEventListener('click', function() {
+            //cache user information
+            let userphone = helpeePhoneMap.get(activeMarker);
+            let userlng = activeMarker.getPosition().lng();
+            let userlat = activeMarker.getPosition().lat();
             activeMarker.setMap(null);
+
+            //update db
             let formdata = new FormData();
-            formdata.append("longitude", activeMarker.getPosition().lng());
-            formdata.append("latitude", activeMarker.getPosition().lat());
-            xmlhttp.open("DELETE", "{{ url_for('main.remove_request')}}", true);
+            formdata.append("longitude", userlng);
+            formdata.append("latitude", userlat);
+            xmlhttp.open("DELETE", "{{ url_for('main.map_view')}}", true);
             xmlhttp.send(formdata);
+
+            // //undo
+            // document.getElementById("helperNotification").innerHTML = '<h1>You\'re a hero!/h1>' +
+            //           '<p>You may click "Undo" any time before closing this window.</p>' +
+            //           '<button id="undoButton">Undo</button>';
+            // document.getElementById("undoButton").addEventListener('click', function() {
+            //
+            // });
+            // document.getElementById()
           });
         });
         // Place pins on map.
@@ -75,20 +91,23 @@
         });
 
         marker.addListener('click', function() {
+          //Check if marker is still valid
+          // xmlhttp.open("GET")
+
           activeMarker = this;
           map.panTo(this.getPosition());
           let contentString = '<div id="helperNotification">'+
                      '<h1>Interested in helping out?</h1>'+
-                     '<p><b>Phone Number:</b> {{ helpee.phone }} and ask what they need! '+
-                     'After confirming, be sure to click on the \'Done\' button '+
-                     'to remove the recipient\'s pin from the map.</p>'+
-                     '<button id="doneButton">Done</button>'+
+                     '<p><b>Phone Number:</b> {{ helpee.phone }} If this request has been '+
+                      'completed: Click "Clear Request" <--i\'ll fix this later lol.</p>'+
+                     '<button id="doneButton">Clear Request</button>'+
                      '</div>';
           infoWindow.setContent(contentString);
           infoWindow.open(map, this);
 
         });
         marker.setMap(map);
+        helpeePhoneMap.set(marker, "{{ helpee.phone }}");
         {% endfor %}
       }
 
