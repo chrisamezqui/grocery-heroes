@@ -31,7 +31,7 @@ def remove_request():
     print(request.form['longitude'])
     longitude = float(request.form['longitude'])
     latitude = float(request.form['latitude'])
-    user = User.query.filter(and_(User.longitude=longitude, User.latitude=latitude)).first()
+    user = User.query.filter(and_(User.longitude==longitude, User.latitude==latitude)).first()
     db.session.delete(user)
     db.session.commit()
 
