@@ -35,6 +35,7 @@ def remove_request():
     db.session.delete(user)
     db.session.commit()
 
+    return ''
     # return redirect(url_for('main.helper'))
 
 
@@ -45,13 +46,17 @@ def helpee():
         longitude = float(request.form['longitude'])
         latitude = float(request.form['latitude'])
 
-        new_helpee = User(
-            phone=phone,
-            longitude=longitude,
-            latitude=latitude
-        )
+        user = User.query.filter(and_(User.longitude==longitude, User.latitude==latitude)).first()
+        if user is not None:
+            user.phone = phone
+        else:
+            new_helpee = User(
+                phone=phone,
+                longitude=longitude,
+                latitude=latitude
+            )
 
-        db.session.add(new_helpee)
+            db.session.add(new_helpee)
         db.session.commit()
 
     return render_template('helpee.html')
