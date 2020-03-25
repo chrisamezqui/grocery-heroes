@@ -59,6 +59,7 @@
           document.getElementById("doneButton").addEventListener('click', function() {
             activeMarker.setMap(null);
             let formdata = new FormData();
+            console.log(activeMarker.position);
             formdata.append("longitude", activeMarker.position.lng);
             formdata.append("latitude", activeMarker.position.lat);
             xmlhttp.open("DELETE", "{{ url_for('main.remove_request')}}", true);
@@ -76,7 +77,7 @@
 
         marker.addListener('click', function() {
           activeMarker = this;
-          map.setCenter(this.getPosition());
+          map.panTo(this.getPosition());
           let contentString = '<div id="helperNotification">'+
                      '<h1>Interested in helping out?</h1>'+
                      '<p><b>Phone Number:</b> {{ helpee.phone }} and ask what they need! '+
