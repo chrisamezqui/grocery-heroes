@@ -10,18 +10,18 @@ main = Blueprint('main', __name__)
 def index():
     return render_template('home.html')
 
-@main.route('/helper')
-def helper():
-    local_helpees = User.query\
-        .filter(User.longitude != None)\
-        .filter(User.latitude != None)\
-        .all()
-
-    context = {
-        'local_helpees' : local_helpees
-    }
-
-    return render_template('helper.html', **context)
+# @main.route('/helper')
+# def helper():
+#     local_helpees = User.query\
+#         .filter(User.longitude != None)\
+#         .filter(User.latitude != None)\
+#         .all()
+#
+#     context = {
+#         'local_helpees' : local_helpees
+#     }
+#
+#     return render_template('helper.html', **context)
 
 @main.route('/helpee', methods=['GET', 'POST'])
 def helpee():
@@ -47,7 +47,7 @@ def helpee():
 
     return render_template('helpee.html')
 
-@main.route('/helper/map', methods=['GET', 'DELETE'])
+@main.route('/helper', methods=['GET', 'DELETE'])
 def map_view():
     if request.method == 'DELETE':
         longitude = float(request.form['longitude'])
@@ -67,17 +67,17 @@ def map_view():
         'local_helpees' : local_helpees,
         'gmapi_key' : GOOGLE_MAPS_API_KEY
     }
-    return render_template('map.html', **context)
+    return render_template('helper.html', **context)
 
-@main.route('/helper/map/marker')
-def verify_marker():
-    phone = request.form['phone']
-    longitude = float(request.form['longitude'])
-    latitude = float(request.form['latitude'])
-    user = User.query.filter(and_(User.longitude==longitude, User.latitude==latitude, User.phone==phone)).first()
-    user_exists = user is not None
-
-    return jsonify(user_exists=user_exists)
+# @main.route('/helper/map/marker')
+# def verify_marker():
+#     phone = request.form['phone']
+#     longitude = float(request.form['longitude'])
+#     latitude = float(request.form['latitude'])
+#     user = User.query.filter(and_(User.longitude==longitude, User.latitude==latitude, User.phone==phone)).first()
+#     user_exists = user is not None
+#
+#     return jsonify(user_exists=user_exists)
 
 
 ##REST API FOR ADMIN (TESTING PURPOSES)##

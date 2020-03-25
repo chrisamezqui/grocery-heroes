@@ -8,10 +8,17 @@
   <link href="{{ url_for('static', filename='bootstrap.min.css')}}" rel="stylesheet">
   <link href="{{ url_for('static', filename='main.css')}}" rel="stylesheet">
 
-  <link href="./assets/main.css" rel="stylesheet"><script charset="utf-8"s"></script></head>
+  <link href="./assets/main.css" rel="stylesheet"><script charset="utf-8"s"></script>
+  <style>
+    /* Always set the map height explicitly to define the size of the div
+     * element that contains the map. */
+    #map {
+      height: 100%;
+    }
+  </style>
+</head>
 
   <body class="main vsc-initialized">
-
     <div id="navbar-container" class="update-navbar-transparent">
       <nav class="navbar navbar-fixed-top">
         <div class="container-fluid">
@@ -39,6 +46,7 @@
           <h2>
             <div>Thank you for being a Hero</div>
           </h2>
+          <div id="map"><div>
         </div>
         </div>
         <div class="col-sm-12 col-md-6 snooze">
@@ -154,5 +162,93 @@
         </div>
       </div>
     </div>
+    <script>
+      var map, infoWindow, xmlhttp, activeMarker, helpeePhoneMap;
+      // For server updates.
+      if (window.XMLHttpRequest) {
+         // code for modern browsers
+         xmlhttp = new XMLHttpRequest();
+       } else {
+         // code for old IE browsers
+         xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+      }
+
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: -34.397, lng: 150.644},
+          zoom: 13
+        });
+        infoWindow = new google.maps.InfoWindow;
+        helpeePhoneMap = new Map();
+
+        // Try HTML5 geolocation.
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+
+            map.setCenter(pos);
+          }, function() {
+            handleLocationError(true);
+          });
+        } else {
+          // Browser doesn't support Geolocation
+          handleLocationError(false);
+        }
+
+        infoWindow.addListener('domready', function() {
+          document.getElementById("doneButton").addEventListener('click', function() {
+            //cache user information
+            let userphone = helpeePhoneMap.get(activeMarker);
+            let userlng = activeMarker.getPosition().lng();
+            let userlat = activeMarker.getPosition().lat();
+            activeMarker.setMap(null);
+
+            //update db
+            let formdata = new FormData();
+            formdata.append("longitude", userlng);
+            formdata.append("latitude", userlat);
+            xmlhttp.open("DELETE", "{{ url_for('main.helper')}}", true);
+            xmlhttp.send(formdata);
+        });
+        // Place pins on map.
+        var marker;
+        {% for helpee in local_helpees %}
+        marker = new google.maps.Marker({
+          position: {lat: {{ helpee.latitude }}, lng:{{ helpee. longitude }}},
+          map: map,
+          title: 'Somebody could use some help here!'
+        });
+
+        marker.addListener('click', function() {
+          map.panTo(this.getPosition());
+          activeMarker = this;
+          let contentString = '<div id="helperNotification">'+
+                     '<h1>Interested in helping out?</h1>'+
+                     '<p><b>Phone Number:</b> {{ helpee.phone }} If this request has been '+
+                      'completed: Click "Clear Request" <--i\'ll fix this later lol.</p>'+
+                     '<button id="doneButton">Clear Request</button>'+
+                     '</div>';
+          infoWindow.setContent(contentString);
+          infoWindow.open(map, this);
+
+        });
+        marker.setMap(map);
+        helpeePhoneMap.set(marker, "{{ helpee.phone }}");
+        {% endfor %}
+      }
+
+      function handleLocationError(browserHasGeolocation) {
+        alert(browserHasGeolocation ?
+                              'Error: The Geolocation service failed.' :
+                              'Error: Your browser doesn\'t support geolocation.');
+      }
+
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key={{ gmapi_key }}&callback=initMap">
+    </script>
 </body>
 </html>
