@@ -254,8 +254,8 @@
                 event.preventDefault();
                 console.log(form.elements);
                 console.log(form.elements[0]);
-                console.log(form.elements[0].length);
-                if (form.elements[0].length == 0) {
+                console.log(form.elements[0].value);
+                if (form.elements[0].value == 0) {
                   alert("Please enter your phone number before clicking submit.");
                 } else {
                   sendRegistrationData();
