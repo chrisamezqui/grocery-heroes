@@ -60,8 +60,10 @@
       </div>
     </div>
 
-    <div class="container-fluid" style="height: 1050px">
-      <div id="map"></div>
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div id="map"></div>
+      </div>
     </div>
 
 
@@ -227,10 +229,11 @@
         });
 
         marker.addListener('click', function() {
+          map.scrollIntoView();
           map.panTo(this.getPosition());
           activeMarker = this;
-          let contentString = '<div id="helperNotification">'+
-                     '<h1>Interested in helping out?</h1>'+
+          let contentString = '<div style="color:black" id="helperNotification">'+
+                     '<h2>Interested in helping out?</h2>'+
                      '<p><b>Phone Number:</b> {{ helpee.phone }} If this request has been '+
                       'completed: Click "Clear Request" <--i\'ll fix this later lol.</p>'+
                      '<button id="doneButton">Clear Request</button>'+
