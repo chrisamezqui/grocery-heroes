@@ -48,7 +48,7 @@ def helpee():
     return render_template('helpee.html')
 
 @main.route('/helper', methods=['GET', 'DELETE'])
-def map_view():
+def helper():
     if request.method == 'DELETE':
         longitude = float(request.form['longitude'])
         latitude = float(request.form['latitude'])
