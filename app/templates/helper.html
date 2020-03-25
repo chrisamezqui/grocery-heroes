@@ -1,15 +1,11 @@
-<!-- {% extends 'base.html' %}
-{% block content %}
-  <h1> Helper Page </h1>
-  <a href="{{url_for('main.map_view')}}">Go to map</a>
-{% endblock %} -->
 <!DOCTYPE html>
 
 <!-- THANK YOU TO SUPERHUMAN.COM FROM WHICH BERKELEY MERRIAGE PACT SHAMELESSLY STOLE THIS WEBSITE FROM WHICH WE'VE SHAMELESSY STOLEN THIS WEBSITE. THANK YOU IN PARTICULAR TO RAHUL VOHRA, WHO IS AN AMAZING PERSON :) -->
-<!--
+
 <html lang="en">
 <head>
-<link href="./assets/bootstrap.min.css" rel="stylesheet">
+  <link href="{{ url_for('static', filename='bootstrap.min.css')}}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='main.css')}}" rel="stylesheet">
 
   <link href="./assets/main.css" rel="stylesheet"><script charset="utf-8"s"></script></head>
 
@@ -42,22 +38,15 @@
           <h2>
             <div>Thank you for being a Hero</div>
           </h2>
-          <h3>
-            <div></div>
-          </h3>
-          {% for helpee in local_helpees %}
-          <div><p><b>{{ helpee.phone }}</b> | {{ helpee.longitude }} | {{ helpee.latitude}}
-            <button formmethod="post" formaction="{{ url_for('main.remove_request', phone=helpee.phone) }}" type="submit">Done</button>
-          </p>
-        </div>
-        {% endfor %}
         </div>
         </div>
         <div class="col-sm-12 col-md-6 snooze">
           <div class="row">
               <div class="col-xs-offset-1 col-xs-10 col-sm-offset-3 col-sm-6 col-md-offset-3 col-md-8">
               <div class="wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
-                <img class="profile" src="./assets/imgs/yellow_flower.png" alt="Superhuman social insights">
+                <!-- <img class="profile" src="./assets/imgs/yellow_flower.png" alt="Superhuman social insights"> -->
+                <img src="{{ url_for('static', filename='imgs/yellow_flower.png') }}">
+
               </div>
             </div>
           </div>
@@ -104,7 +93,8 @@
           </div>
         </div>
         <div class="col-xs-12 col-lg-pull-8 col-lg-offset-0 col-lg-5 wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
-          <img class="profile" src="./assets/imgs/pink_flower.png" alt="Superhuman social insights">
+          <!-- <img class="profile" src="./assets/imgs/pink_flower.png" alt="Superhuman social insights"> -->
+          <img src="{{ url_for('static', filename='imgs/pink_flower.png') }}">
         </div>
       </div>
     </div>
@@ -166,4 +156,4 @@
       </div>
     </div>
 </body>
-</html> -->
+</html>

@@ -3,9 +3,9 @@
 <!-- THANK YOU TO SUPERHUMAN.COM FROM WHICH BERKELEY MERRIAGE PACT SHAMELESSLY STOLE THIS WEBSITE FROM WHICH WE'VE SHAMELESSY STOLEN THIS WEBSITE. THANK YOU IN PARTICULAR TO RAHUL VOHRA, WHO IS AN AMAZING PERSON :) -->
 <html lang="en">
 <head>
-<link href="./assets/bootstrap.min.css" rel="stylesheet">
+  <link href="{{ url_for('static', filename='bootstrap.min.css')}}" rel="stylesheet">
 
-  <link href="./assets/main.css" rel="stylesheet"><script charset="utf-8"></script></head>
+  <link href="{{ url_for('static', filename='main.css')}}" rel="stylesheet">
 
   <body class="main vsc-initialized">
 
@@ -58,7 +58,8 @@
           <div class="row">
               <div class="col-xs-offset-1 col-xs-10 col-sm-offset-3 col-sm-6 col-md-offset-3 col-md-8">
               <div class="wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
-                <img class="profile" src="./assets/imgs/falling_tomatoes.png" alt="Superhuman social insights">
+                <img src="{{ url_for('static', filename='imgs/falling_tomatoes.png') }}">
+                <!-- <img class="profile" src="./assets/imgs/falling_tomatoes.png" alt="Superhuman social insights"> -->
               </div>
             </div>
           </div>
@@ -102,7 +103,9 @@
           </div>
         </div>
         <div class="col-xs-12 col-lg-pull-7 col-lg-offset-0 col-lg-5 wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
-          <img class="profile" src="./assets/imgs/pumpkins.png" alt="Superhuman social insights">
+          <!-- <img class="profile" src="./assets/imgs/pumpkins.png" alt="Superhuman social insights"> -->
+          <img src="{{ url_for('static', filename='imgs/pumpkins.png') }}">
+
         </div>
       </div>
     </div>
