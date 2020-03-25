@@ -215,7 +215,7 @@
             formdata.append("latitude", userlat);
             xmlhttp.open("DELETE", "{{ url_for('main.helper')}}", true);
             xmlhttp.send(formdata);
-          )};
+          });
         });
         // Place pins on map.
         var marker;
