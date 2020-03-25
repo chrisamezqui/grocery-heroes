@@ -48,19 +48,17 @@
 
             map.setCenter(pos);
           }, function() {
-            handleLocationError(true, infoWindow, map.getCenter());
+            handleLocationError(true);
           });
         } else {
           // Browser doesn't support Geolocation
-          handleLocationError(false, infoWindow, map.getCenter());
+          handleLocationError(false);
         }
-
-
 
         infoWindow.addListener('domready', function() {
           document.getElementById("doneButton").addEventListener('click', function() {
             activeMarker.setMap(null);
-            let formdata = new FormData( form );
+            let formdata = new FormData();
             formdata.append("longitude", activeMarker.position.lng);
             formdata.append("latitude", activeMarker.position.lat);
             xmlhttp.open("DELETE", "{{ url_for('main.remove_request')}}", true);
@@ -94,12 +92,10 @@
         {% endfor %}
       }
 
-      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-        infoWindow.setPosition(pos);
-        infoWindow.setContent(browserHasGeolocation ?
+      function handleLocationError(browserHasGeolocation) {
+        alert(browserHasGeolocation ?
                               'Error: The Geolocation service failed.' :
                               'Error: Your browser doesn\'t support geolocation.');
-        infoWindow.open(map);
       }
 
     </script>
