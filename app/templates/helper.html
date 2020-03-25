@@ -59,6 +59,7 @@
           </div>
         </div>
       </div>
+      <div id="downarrow" class="down-arrow"></div>
     </div>
 
     <div class="container-fluid" style="height:1000px;">
@@ -252,6 +253,11 @@
                               'Error: The Geolocation service failed.' :
                               'Error: Your browser doesn\'t support geolocation.');
       }
+
+      var downarrow = document.getElementById("downarrow");
+      downarrow.addEventListener('Click', function() {
+        document.getElementById("map").scrollIntoView();
+      });
 
 
     </script>
