@@ -252,7 +252,11 @@
               let form = document.getElementById( "registrationForm" );
               form.addEventListener( "submit", function ( event ) {
                 event.preventDefault();
-                sendRegistrationData();
+                if (form.elements[0].length == 0) {
+                  alert("Please enter your phone number before clicking submit.");
+                } else {
+                  sendRegistrationData();
+                }
               } );
 
           }, function() {
@@ -265,8 +269,9 @@
 
         function handleLocationError(browserHasGeolocation) {
           alert(browserHasGeolocation ?
-                                'Error: The Geolocation service failed.' :
-                                'Error: Your browser doesn\'t support geolocation.');
+                                'Error: The Geolocation service failed. Grocery Heroes needs your location to continue.' :
+                                'Error: Your browser doesn\'t support geolocation. Grocery Heroes needs your location to continue.');
+
         }
       });
     </script>
