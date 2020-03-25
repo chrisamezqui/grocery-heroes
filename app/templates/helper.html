@@ -215,6 +215,7 @@
             formdata.append("latitude", userlat);
             xmlhttp.open("DELETE", "{{ url_for('main.helper')}}", true);
             xmlhttp.send(formdata);
+          )};
         });
         // Place pins on map.
         var marker;
@@ -236,19 +237,18 @@
                      '</div>';
           infoWindow.setContent(contentString);
           infoWindow.open(map, this);
-
-        });
+        )};
         marker.setMap(map);
         helpeePhoneMap.set(marker, "{{ helpee.phone }}");
         {% endfor %}
-      )};
+      };
 
       function handleLocationError(browserHasGeolocation) {
         alert(browserHasGeolocation ?
                               'Error: The Geolocation service failed.' :
                               'Error: Your browser doesn\'t support geolocation.');
       }
-    }
+
 
     </script>
     <script async defer
