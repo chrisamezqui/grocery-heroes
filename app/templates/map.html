@@ -59,9 +59,8 @@
           document.getElementById("doneButton").addEventListener('click', function() {
             activeMarker.setMap(null);
             let formdata = new FormData();
-            console.log(activeMarker.position);
-            formdata.append("longitude", activeMarker.position.lng);
-            formdata.append("latitude", activeMarker.position.lat);
+            formdata.append("longitude", activeMarker.getPosition().lng());
+            formdata.append("latitude", activeMarker.getPosition().lat());
             xmlhttp.open("DELETE", "{{ url_for('main.remove_request')}}", true);
             xmlhttp.send(formdata);
           });
