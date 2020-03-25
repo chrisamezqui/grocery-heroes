@@ -237,7 +237,7 @@
         marker.setMap(map);
         helpeePhoneMap.set(marker, "{{ helpee.phone }}");
         {% endfor %}
-      }
+      )};
 
       function handleLocationError(browserHasGeolocation) {
         alert(browserHasGeolocation ?
