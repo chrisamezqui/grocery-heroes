@@ -237,7 +237,7 @@
                      '</div>';
           infoWindow.setContent(contentString);
           infoWindow.open(map, this);
-        )};
+        });
         marker.setMap(map);
         helpeePhoneMap.set(marker, "{{ helpee.phone }}");
         {% endfor %}
