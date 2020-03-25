@@ -1,5 +1,170 @@
-{% extends 'base.html' %}
+<!-- {% extends 'base.html' %}
 {% block content %}
   <h1> Helper Page </h1>
   <a href="{{url_for('main.map_view')}}">Go to map</a>
-{% endblock %}
+{% endblock %} -->
+<!DOCTYPE html>
+
+<!-- THANK YOU TO SUPERHUMAN.COM FROM WHICH BERKELEY MERRIAGE PACT SHAMELESSLY STOLE THIS WEBSITE FROM WHICH WE'VE SHAMELESSY STOLEN THIS WEBSITE. THANK YOU IN PARTICULAR TO RAHUL VOHRA, WHO IS AN AMAZING PERSON :) -->
+
+<html lang="en">
+<head>
+    <!-- Bootstrap core CSS -->
+<link href="./assets/bootstrap.min.css" rel="stylesheet">
+
+  <link href="./assets/main.css" rel="stylesheet"><script charset="utf-8" src="./assets/button.550007e6cc79c00bac51111d8131d860.js"></script></head>
+
+  <body class="main vsc-initialized">
+
+    <div id="navbar-container" class="update-navbar-transparent">
+      <nav class="navbar navbar-fixed-top">
+        <div class="container-fluid">
+          <div class="row take-me-to-superhuman-section">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-offset-1 col-xs-12 col-lg-offset-4 col-lg-4 logo">
+              <h2>
+                  <div><strong>Grocery Heroes</strong></div>
+              </h2>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+
+
+    <div class="container-fluid be-brilliant-with-people update-navbar-white update-navbar-show-button update-navbar-hide-take-me-to-superhuman">
+      <div class="row">
+        <div class="col-xs-offset-1 col-xs-10 col-sm-offset-3 col-sm-6 col-lg-offset-1 col-lg-5">
+        <div class="wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
+          <div class="separator"></div>
+          <h2>
+            <div>Thank you for being a Hero</div>
+          </h2>
+          <h3>
+            <div></div>
+          </h3>
+          {% for helpee in local_helpees %}
+          <div><p><b>{{ helpee.phone }}</b> | {{ helpee.longitude }} | {{ helpee.latitude}}
+            <button formmethod="post" formaction="{{ url_for('main.remove_request', phone=helpee.phone) }}" type="submit">Done</button>
+          </p>
+        </div>
+        {% endfor %}
+        </div>
+        </div>
+        <div class="col-sm-12 col-md-6 snooze">
+          <div class="row">
+              <div class="col-xs-offset-1 col-xs-10 col-sm-offset-3 col-sm-6 col-md-offset-3 col-md-8">
+              <div class="wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
+                <img class="profile" src="./assets/imgs/yellow_flower.png" alt="Superhuman social insights">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="container-fluid introduction update-navbar-white update-navbar-show-button update-navbar-hide-take-me-to-superhuman">
+      <div class="row">
+        <div class="col-xs-12 col-lg-push-6 col-lg-offset-0 col-lg-5">
+          <div class="row">
+            <div class="col-xs-offset-1 col-xs-10 col-sm-offset-3 col-sm-6 col-lg-offset-0 col-lg-12">
+            <div class="wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
+              <div class="separator"></div>
+              <h2>
+                <div>How it works:</div>
+              </h2>
+              <h3>
+                <div></div>
+              </h3>
+              <div class="narrative">
+                <p>
+                    1. Find someone who needs help in a convenient location for you
+                </p>
+                <p>
+                    2. Contact the number listed. Ask: <br>
+                    <br>  🞄 What they need
+                    <br>  🞄 What their exact address is
+                    <br>  🞄 How they plan to reimburse you (e.g. <a href="https://www.paypal.com/us/webapps/mpp/account-selection?&gclid=EAIaIQobChMI2vq72syq6AIVSh6tBh2r2wRpEAAYASADEgK-EvD_BwE&gclsrc=aw.ds">PayPal</a> or <a href = "https://venmo.com/signup">Venmo</a>).
+                </p>
+                <p>
+                    3. If you decide to help, be sure to clear this individual's request.
+                </p>
+                <p>
+                    4. Get their groceries and drop them off on their doorstep <em> after </em> being reimbursed. To prevent contamination, make sure not to open the door.
+                </p>
+                <p>
+                    5. Congrats, you’re a Hero!
+                </p>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-12 col-lg-pull-8 col-lg-offset-0 col-lg-5 wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+          <img class="profile" src="./assets/imgs/pink_flower.png" alt="Superhuman social insights">
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid are-you-ready update-navbar-transparent update-navbar-hide-on-desktop update-navbar-hide-take-me-to-superhuman">
+      <div class="row">
+        <div class="screenshot-container">
+          <div class="screenshot screenshot-3">
+            <div class="front"></div>
+            <div class="left"></div>
+            <div class="bottom"></div>
+          </div>
+          <div class="screenshot screenshot-2">
+            <div class="front"></div>
+            <div class="left"></div>
+            <div class="bottom"></div>
+          </div>
+          <div class="screenshot screenshot-1">
+            <div class="front"></div>
+            <div class="left"></div>
+            <div class="bottom"></div>
+          </div>
+        </div>
+        <div class="overlay-1"></div>
+        <div class="overlay-2"></div>
+        <div class="col-xs-offset-1 col-xs-10">
+          <h1>
+            <div>Grocery <br> Heroes </div>
+          </h1>
+          <div data-signup-form="" class="sign-up">
+            <table>
+              <tbody><tr>
+                <td class="button-cell">
+                  <a href="{{ url_for('main.helper') }}">
+                    <div data-submit="" class="button">
+                      <div>Be a Hero</div>
+                    </div>
+                  </a>
+                  <a href="{{ url_for('main.helpee') }}">
+                    <div data-submit="" class="button">
+                      <div>Get Help</div>
+                    </div>
+                  </a>
+                </td>
+              </tr>
+            </tbody></table>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-offset-1 col-xs-10 col-sm-offset-7 col-sm-4 col-lg-offset-8 col-lg-3">
+          <div class="contents">
+            <div class="separator"></div>
+            <h3>
+              <div>grocery.heroes.official<br>@gmail.com</div>
+            </h3>
+          </div>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+<!-- {% extends 'base.html' %}
 
 <head>
   <title>Grocery Heroes Recipient Registration</title>
@@ -67,4 +67,279 @@
   });
 </script>
 
-{% endblock %}
+{% endblock %} -->
+
+<!DOCTYPE html>
+
+<!-- THANK YOU TO SUPERHUMAN.COM FROM WHICH BERKELEY MERRIAGE PACT SHAMELESSLY STOLE THIS WEBSITE FROM WHICH WE'VE SHAMELESSY STOLEN THIS WEBSITE. THANK YOU IN PARTICULAR TO RAHUL VOHRA, WHO IS AN AMAZING PERSON :) -->
+
+<html lang="en">
+<head>
+    <!-- Bootstrap core CSS -->
+<link href="./assets/bootstrap.min.css" rel="stylesheet">
+
+  <link href="./assets/main.css" rel="stylesheet"><script charset="utf-8"></script></head>
+
+  <body class="main vsc-initialized">
+
+    <div id="navbar-container" class="update-navbar-transparent">
+      <nav class="navbar navbar-fixed-top">
+        <div class="container-fluid">
+          <div class="row take-me-to-superhuman-section">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-offset-1 col-xs-12 col-lg-offset-4 col-lg-4 logo">
+              <h2>
+                  <div><strong>Grocery Heroes</strong></div>
+              </h2>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+
+    <div class="container-fluid be-brilliant-with-people update-navbar-white update-navbar-show-button update-navbar-hide-take-me-to-superhuman">
+      <div class="row">
+        <div class="col-xs-offset-1 col-xs-10 col-sm-offset-3 col-sm-6 col-lg-offset-1 col-lg-5">
+        <div class="wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
+          <div id="registrationHeader" class="separator">
+          <h2>
+            <div>Please tell us about yourself</div>
+          </h2>
+          </div>
+          <div id="registrationBody" class="narrative">
+            <p>
+                Your phone number and location will be available on the <a href="{{ url_for('main.helper') }}" style="color:white">helper page</a> for Heroes to see until your request has been completed.
+            </p>
+          <br>
+          <br>
+          <form id="registrationForm">
+            <label for="phone">Phone Number:</label><br>
+            <input style="color:black" type="text" id="phone" name="phone" placeholder="(012)345-6789" pattern="[(][0-9]{3}[)][0-9]{3}-[0-9]{4}"><br>
+            <br>
+            <input type="submit" value="Submit" id="registrationSubmit">
+          </form>
+          <p>
+              <br> <br> If you wish to clear your request, please do so from the <a href="{{ url_for('main.helper') }}" style="color:white">helper page</a>.
+          </p>
+        </div>
+        </div>
+        </div>
+        <div class="col-sm-12 col-md-6 snooze">
+          <div class="row">
+              <div class="col-xs-offset-1 col-xs-10 col-sm-offset-3 col-sm-6 col-md-offset-3 col-md-8">
+              <div class="wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
+                <img class="profile" src="./assets/imgs/falling_tomatoes.png" alt="Superhuman social insights">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="container-fluid introduction update-navbar-white update-navbar-show-button update-navbar-hide-take-me-to-superhuman">
+      <div class="row">
+        <div class="col-xs-12 col-lg-push-6 col-lg-offset-0 col-lg-5">
+          <div class="row">
+            <div class="col-xs-offset-1 col-xs-10 col-sm-offset-3 col-sm-6 col-lg-offset-0 col-lg-12">
+            <div class="wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
+              <div class="separator"></div>
+              <h2>
+                <div>How it works:</div>
+              </h2>
+              <div class="narrative">
+                <p>
+                    1. Fill out the form above. Requests can be seen from <a href="{{ url_for('main.helper') }}">helper page</a>.
+                </p>
+                <p>
+                    2. Prepare your grocery list and an electronic method to reimburse your helper (e.g. <a href="https://www.paypal.com/us/webapps/mpp/account-selection?&gclid=EAIaIQobChMI2vq72syq6AIVSh6tBh2r2wRpEAAYASADEgK-EvD_BwE&gclsrc=aw.ds">PayPal</a> or <a href = "https://venmo.com/signup">Venmo</a>).
+                </p>
+                <p>
+                    3. Wait for a helper to contact you. When one does, tell them: <br>
+                    <br>  🞄 What you need
+                    <br>  🞄 Your exact address
+                    <br>  🞄 How you plan to reimburse them.
+                </p>
+                <p>
+                    4. Reimburse your helper as they leave your groceries on your doorstep. Do not open your door to prevent contamination.
+                </p>
+                <p>
+                    5. Send your helper a thank you message!
+                </p>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-12 col-lg-pull-7 col-lg-offset-0 col-lg-5 wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+          <img class="profile" src="./assets/imgs/pumpkins.png" alt="Superhuman social insights">
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid two-up update-navbar-white update-navbar-show-button update-navbar-hide-take-me-to-superhuman">
+      <div class="row">
+        <div class="col-sm-12 col-md-6 scheduled-emails">
+          <div class="row">
+            <div class="overlay">
+              <div class="col-xs-offset-1 col-xs-10 col-sm-offset-3 col-sm-6 col-md-offset-2 col-md-8">
+              <div class="wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
+                <div class="separator"></div>
+                <h2>
+                  <div>I am having trouble paying for my groceries. What should I do?</div>
+                </h2>
+                <h3>
+                  <div></div>
+                </h3>
+                <div class="narrative">
+                  <p>
+                    Please contact us, and we will do our best to figure something out.
+                  </p>
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-6 snooze">
+          <div class="row">
+            <div class="overlay">
+              <div class="col-xs-offset-1 col-xs-10 col-sm-offset-3 col-sm-6 col-md-offset-2 col-md-8">
+              <div class="wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
+                <div class="separator"></div>
+                <h2>
+                    <div>How do I ensure I stay safe?</div>
+                </h2>
+                <h3>
+                  <div></div>
+                </h3>
+                <div class="narrative">
+                  <p>
+                    Please do not open your door to your helper. We recommend reimbursing electronically such that your helper can simply leave your groceries on your doorstep.
+                  </p>
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid are-you-ready update-navbar-transparent update-navbar-hide-on-desktop update-navbar-hide-take-me-to-superhuman">
+      <div class="row">
+        <div class="screenshot-container">
+          <div class="screenshot screenshot-3">
+            <div class="front"></div>
+            <div class="left"></div>
+            <div class="bottom"></div>
+          </div>
+          <div class="screenshot screenshot-2">
+            <div class="front"></div>
+            <div class="left"></div>
+            <div class="bottom"></div>
+          </div>
+          <div class="screenshot screenshot-1">
+            <div class="front"></div>
+            <div class="left"></div>
+            <div class="bottom"></div>
+          </div>
+        </div>
+        <div class="overlay-1"></div>
+        <div class="overlay-2"></div>
+        <div class="col-xs-offset-1 col-xs-10">
+          <h1>
+            <div>Grocery <br> Heroes </div>
+          </h1>
+          <div data-signup-form="" class="sign-up">
+            <table>
+              <tbody><tr>
+                <td class="button-cell">
+                  <a href="{{ url_for('main.helper') }}">
+                    <div data-submit="" class="button">
+                      <div>Be a Hero</div>
+                    </div>
+                  </a>
+                  <a href="{{ url_for('main.helpee') }}">
+                    <div data-submit="" class="button">
+                      <div>Get Help</div>
+                    </div>
+                  </a>
+                </td>
+              </tr>
+            </tbody></table>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-offset-1 col-xs-10 col-sm-offset-7 col-sm-4 col-lg-offset-8 col-lg-3">
+          <div class="contents">
+            <div class="separator"></div>
+            <h3>
+              <div>grocery.heroes.official<br>@gmail.com</div>
+            </h3>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      window.addEventListener( "load", function () {
+        var xmlhttp;
+        if (window.XMLHttpRequest) {
+           // code for modern browsers
+           xmlhttp = new XMLHttpRequest();
+         } else {
+           // code for old IE browsers
+           xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+              var latitude = position.coords.latitude;
+              var longitude = position.coords.longitude;
+              function sendRegistrationData() {
+                const formdata = new FormData( form );
+                formdata.append("longitude", longitude)
+                formdata.append("latitude", latitude)
+
+                xmlhttp.addEventListener( "load", function(event) {
+                } );
+
+                xmlhttp.addEventListener( "error", function( event ) {
+                  alert( 'Oops! Something went wrong. :o' );
+                } );
+
+                xmlhttp.open( "POST", "{{ url_for('main.helpee') }}" );
+                xmlhttp.send(formdata);
+
+                document.getElementById("registrationBody").innerHTML = '<h2>Thank you for '+
+                'submitting your request. View or clear your request at from the '+
+                '<a href="{{ url_for(\'main.helper\') }}" style="color:white">helper page</a>.</h2>';
+                document.getElementById("registrationHeader").innerHTML = '';
+              }
+              let form = document.getElementById( "registrationForm" );
+              form.addEventListener( "submit", function ( event ) {
+                event.preventDefault();
+                sendRegistrationData();
+              } );
+
+          }, function() {
+            handleLocationError(true);
+          });
+        } else {
+          // Browser doesn't support Geolocation
+          handleLocationError(false);
+        }
+
+        function handleLocationError(browserHasGeolocation) {
+          alert(browserHasGeolocation ?
+                                'Error: The Geolocation service failed.' :
+                                'Error: Your browser doesn\'t support geolocation.');
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -43,6 +43,8 @@ def helpee():
             db.session.add(new_helpee)
         db.session.commit()
 
+        return jsonify(success=True)
+
     return render_template('helpee.html')
 
 @main.route('/helper/map', methods=['GET', 'DELETE'])

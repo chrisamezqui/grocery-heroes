@@ -1,4 +1,226 @@
-{% extends 'base.html' %}
+<!-- {% extends 'base.html' %}
 {% block content %}
 <h1> Home Page </h1>
-{% endblock %}
+{% endblock %} -->
+
+<!DOCTYPE html>
+
+<!-- THANK YOU TO SUPERHUMAN.COM FROM WHICH BERKELEY MERRIAGE PACT SHAMELESSLY STOLE THIS WEBSITE FROM WHICH WE'VE SHAMELESSY STOLEN THIS WEBSITE. THANK YOU IN PARTICULAR TO RAHUL VOHRA, WHO IS AN AMAZING PERSON :) -->
+
+<html lang="en">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+<meta name="description" content="Made by and made for Berkeley students">
+<meta name="author" content="Etna">
+
+    <!-- Bootstrap core CSS -->
+<link href="./assets/bootstrap.min.css" rel="stylesheet">
+
+  <link href="./assets/main.css" rel="stylesheet"><script charset="utf-8" src="./assets/button.550007e6cc79c00bac51111d8131d860.js"></script></head>
+
+  <body class="main vsc-initialized">
+
+    <div id="navbar-container" class="update-navbar-transparent">
+      <nav class="navbar navbar-fixed-top">
+        <div class="container-fluid">
+          <div class="row take-me-to-superhuman-section">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-offset-1 col-xs-12 col-lg-offset-4 col-lg-4 logo">
+              <h2>
+                  <div><strong>Grocery Heroes</strong></div>
+              </h2>
+        </div>
+      </nav>
+    </div>
+
+    <div class="container-fluid header index-page update-navbar-transparent">
+        <div class="row">
+          <div class="bar"></div>
+          <div class="col-xs-offset-1 col-xs-10 col-md-10 col-lg-4">
+            <h1 class="update-navbar-black update-navbar-hide-on-desktop">
+              <div><nobr>Let's beat</nobr><br><nobr>COVID-19</nobr><br>Together</div>
+            </h1>
+            <div data-signup-form="" class="sign-up mobile update-navbar-black update-navbar-hide-on-desktop update-navbar-hide-take-me-to-superhuman">
+              <table>
+                <tbody><tr>
+                  <td class="button-cell">
+                    <a href="{{ url_for('main.helper') }}">
+                      <div data-submit="" class="button">
+                        <div>Be a Hero</div>
+                      </div>
+                    </a>
+                    <a href="{{ url_for('main.helpee') }}">
+                      <div data-submit="" class="button">
+                        <div>Get Help</div>
+                      </div>
+                    </a>
+                  </td>
+                </tr>
+              </tbody></table>
+            </div>
+          </div>
+          <div class="col-xs-offset-0 col-xs-12 col-sm-offset-0 col-sm-6 col-lg-offset-0 col-lg-7">
+            <div class="row">
+              <img src="./assets/imgs/food_bag.png" alt="Superhuman on desktop and iPhone">
+            </div>
+          </div>
+        </div>
+        <div class="down-arrow"></div>
+    </div>
+
+    <div class="container-fluid introduction update-navbar-white update-navbar-show-button update-navbar-hide-take-me-to-superhuman">
+      <div class="row">
+        <div class="background"></div>
+        <div class="col-xs-offset-1 col-xs-10 col-sm-offset-3 col-sm-6 col-lg-offset-4 col-lg-4">
+          <div class="separator"></div>
+          <div class="wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
+          <h2>
+            <div>Why Grocery Heroes?</div>
+          </h2>
+          <div class="narrative">
+            <p>
+                Due to the COVID-19 pandemic, many seniors and other at risk persons are faced with a difficult decision: risk a trip to the grocery store or go without necessary provisions. This website is a simple way to indicate if you need help getting groceries, or offer your help if you’re less at risk or already getting groceries anyways.
+            </p>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="container-fluid be-brilliant-with-people update-navbar-white update-navbar-show-button update-navbar-hide-take-me-to-superhuman">
+      <div class="row">
+        <div class="col-xs-12 col-lg-push-6 col-lg-offset-1 col-lg-4">
+          <div class="row">
+            <div class="col-xs-offset-1 col-xs-10 col-sm-offset-3 col-sm-6 col-lg-offset-0 col-lg-12">
+            <div class="wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
+              <div class="separator"></div>
+              <h2>
+                <div>How does this work?</div>
+              </h2>
+              <h3>
+                <div></div>
+              </h3>
+              <div class="narrative">
+                <p>
+                    If someone needs help, we request their phone number and location. The request will show up for helpers to see, and if someone wants to help they can contact the helpee and ask for details. The helper then clears the request, gets the groceries and drops them off on the helpee’s doorstep as they are reimbursed digitally, for example through PayPal or Venmo.
+                </p>
+                <p>
+                    We do not permanently store any personal information.
+                </p>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-12 col-lg-pull-5 col-lg-offset-1 col-lg-5 wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+          <div class="widget-container">
+            <img class="profile" src="./assets/imgs/produce_heart.png" alt="Superhuman social insights">
+            <div class="baseline-strut" style="height: 0px;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="container-fluid read-status update-navbar-white update-navbar-show-button update-navbar-hide-take-me-to-superhuman">
+      <div class="row">
+        <div class="col-xs-offset-1 col-xs-10 col-sm-5 col-lg-3 contents">
+          <div class="separator"></div>
+          <div class="wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
+          <h2>
+            <div>Who are we?</div>
+          </h2>
+          <h3>
+            <div></div>
+          </h3>
+          <div class="narrative">
+            <p>
+              We are a couple of UC Berkeley students trying to make things a little better in some very trying times.
+            </p>
+            <p>
+              Feel free to contact us if you have any feedback or suggestions!
+            </p>
+            <p>
+              grocery.heroes.official@gmail.com
+            </p>
+          </div>
+          </div>
+        </div>
+        <div class="col-xs-12 col-lg-offset-1 col-lg-7">
+          <div class="row">
+            <div class="image-container">
+              <img src="./assets/imgs/oski_surprised.png">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="container-fluid are-you-ready update-navbar-transparent update-navbar-hide-on-desktop update-navbar-hide-take-me-to-superhuman">
+      <div class="row">
+        <div class="screenshot-container">
+          <div class="screenshot screenshot-3">
+            <div class="front"></div>
+            <div class="left"></div>
+            <div class="bottom"></div>
+          </div>
+          <div class="screenshot screenshot-2">
+            <div class="front"></div>
+            <div class="left"></div>
+            <div class="bottom"></div>
+          </div>
+          <div class="screenshot screenshot-1">
+            <div class="front"></div>
+            <div class="left"></div>
+            <div class="bottom"></div>
+          </div>
+        </div>
+        <div class="overlay-1"></div>
+        <div class="overlay-2"></div>
+        <div class="col-xs-offset-1 col-xs-10">
+          <h1>
+            <div>Grocery <br> Heroes </div>
+          </h1>
+          <div data-signup-form="" class="sign-up">
+            <table>
+              <tbody><tr>
+                <td class="button-cell">
+                  <a href="{{ url_for('main.helper') }}">
+                    <div data-submit="" class="button">
+                      <div>Be a Hero</div>
+                    </div>
+                  </a>
+                  <a href="{{ url_for('main.helpee') }}">
+                    <div data-submit="" class="button">
+                      <div>Get Help</div>
+                    </div>
+                  </a>
+                </td>
+              </tr>
+            </tbody></table>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-offset-1 col-xs-10 col-sm-offset-7 col-sm-4 col-lg-offset-8 col-lg-3">
+          <div class="contents">
+            <div class="separator"></div>
+            <h3>
+              <div>grocery.heroes.official<br>@gmail.com</div>
+            </h3>
+          </div>
+        </div>
+      </div>
+    </div>
+
+</body>
+</html>
