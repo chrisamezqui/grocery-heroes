@@ -27,6 +27,7 @@ def helper():
 
 @main.route('/helper/map', methods=['DELETE'])
 def remove_request():
+    print(request.form)
     longitude = float(request.form['longitude'])
     latitude = float(request.form['latitude'])
     user = User.query.filter(and_(longitude=longitude, latitude=latitude)).first()
