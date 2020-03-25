@@ -1,78 +1,6 @@
-<!-- {% extends 'base.html' %}
-
-<head>
-  <title>Grocery Heroes Recipient Registration</title>
-  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
-  <meta charset="utf-8">
-</head>
-
-{% block content %}
-<h1> Helpee Page </h1>
-
-<form id="registrationForm">
-  <label for="fname">Phone Number:</label><br>
-  <input type="text" id="phone" name="phone"><br>
-  <input type="submit" value="Submit">
-</form>
-
-<script>
-  window.addEventListener( "load", function () {
-    var xmlhttp;
-    if (window.XMLHttpRequest) {
-       // code for modern browsers
-       xmlhttp = new XMLHttpRequest();
-     } else {
-       // code for old IE browsers
-       xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-    }
-
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function(position) {
-          var latitude = position.coords.latitude;
-          var longitude = position.coords.longitude;
-          function sendRegistrationData() {
-            const formdata = new FormData( form );
-            formdata.append("longitude", longitude)
-            formdata.append("latitude", latitude)
-
-            xmlhttp.addEventListener( "load", function(event) {
-            } );
-
-            xmlhttp.addEventListener( "error", function( event ) {
-              alert( 'Oops! Something went wrong. :o' );
-            } );
-
-            xmlhttp.open( "POST", "{{ url_for('main.helpee') }}" );
-            xmlhttp.send( formdata );
-          }
-          let form = document.getElementById( "registrationForm" );
-          form.addEventListener( "submit", function ( event ) {
-            event.preventDefault();
-            sendRegistrationData();
-          } );
-
-      }, function() {
-        handleLocationError(true);
-      });
-    } else {
-      // Browser doesn't support Geolocation
-      handleLocationError(false);
-    }
-
-    function handleLocationError(browserHasGeolocation) {
-      alert(browserHasGeolocation ?
-                            'Error: The Geolocation service failed.' :
-                            'Error: Your browser doesn\'t support geolocation.');
-    }
-  });
-</script>
-
-{% endblock %} -->
-
 <!DOCTYPE html>
 
 <!-- THANK YOU TO SUPERHUMAN.COM FROM WHICH BERKELEY MERRIAGE PACT SHAMELESSLY STOLE THIS WEBSITE FROM WHICH WE'VE SHAMELESSY STOLEN THIS WEBSITE. THANK YOU IN PARTICULAR TO RAHUL VOHRA, WHO IS AN AMAZING PERSON :) -->
-<!--
 <html lang="en">
 <head>
 <link href="./assets/bootstrap.min.css" rel="stylesheet">
@@ -316,7 +244,7 @@
 
                 document.getElementById("registrationBody").innerHTML = '<h2>Thank you for '+
                 'submitting your request. View or clear your request at from the '+
-                '<a href="{{ url_for(\'main.helper\') }}" style="color:white">helper page</a>.</h2>';
+                '<a href="{{ url_for('main.helper') }}" style="color:white">helper page</a>.</h2>';
                 document.getElementById("registrationHeader").innerHTML = '';
               }
               let form = document.getElementById( "registrationForm" );
@@ -341,4 +269,4 @@
       });
     </script>
   </body>
-</html> -->
+</html>
