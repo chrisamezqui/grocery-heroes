@@ -1,16 +1,5 @@
 {% extends 'base.html' %}
 {% block content %}
   <h1> Helper Page </h1>
-  {% for helpee in local_helpees %}
-    <div>
-      <ul>
-        <li>
-          <b>{{ helpee.phone }}</b> | {{ helpee.longitude }} | {{ helpee.latitude}} <form
-          method="POST" action="{{ url_for('main.remove_request', phone=helpee.phone) }}">
-            <button type="submit">Done</button>
-          </form>
-        </li>
-      </ul>
-    </div>
-  {% endfor %}
+  <a href="{{url_for('main.map_view')}}">Go to map</a>
 {% endblock %}
