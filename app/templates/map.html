@@ -91,11 +91,8 @@
         });
 
         marker.addListener('click', function() {
-          //Check if marker is still valid
-          // xmlhttp.open("GET")
-
-          activeMarker = this;
           map.panTo(this.getPosition());
+          activeMarker = this;
           let contentString = '<div id="helperNotification">'+
                      '<h1>Interested in helping out?</h1>'+
                      '<p><b>Phone Number:</b> {{ helpee.phone }} If this request has been '+

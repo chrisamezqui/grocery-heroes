@@ -67,13 +67,15 @@ def map_view():
     }
     return render_template('map.html', **context)
 
-# @main.route('/helper/map/marker')
-# def verify_marker():
-#     longitude = float(request.form['longitude'])
-#     latitude = float(request.form['latitude'])
-#     user = User.query.filter(and_(User.longitude==longitude, User.latitude==latitude)).first()
-#
-#     return
+@main.route('/helper/map/marker')
+def verify_marker():
+    phone = request.form['phone']
+    longitude = float(request.form['longitude'])
+    latitude = float(request.form['latitude'])
+    user = User.query.filter(and_(User.longitude==longitude, User.latitude==latitude, User.phone==phone)).first()
+    user_exists = user is not None
+
+    return jsonify(user_exists=user_exists)
 
 
 ##REST API FOR ADMIN (TESTING PURPOSES)##
