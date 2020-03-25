@@ -1,1 +1,3 @@
-GOOGLE_MAPS_API_KEY = "AIzaSyDnb6gACUo5lvaqOsxyjty8NSYkf5HhL7Y"
+import os
+
+GOOGLE_MAPS_API_KEY = os.environ.get('GOOGLE_MAPS_API_KEY')
