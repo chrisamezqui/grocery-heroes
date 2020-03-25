@@ -7365,8 +7365,6 @@ span.rev {
 
 #registrationSubmit
 {
-  /* width: 60px;
-  height: 30px; */
   color:black;
   border: none;
   font-family: "Avenir LT Std Book",sans-serif;
@@ -7378,8 +7376,14 @@ span.rev {
 }
 #registrationSubmit:hover
 {
-  /* font-family: "Avenir LT Std Book",sans-serif; */
-
   background-color: #4CAF50;
    color: white;
+ }
+
+ .map-container
+ {
+   padding-left: 0;
+   padding-right: 0;
+   width: 100%;
+   height: 100%;
  }
