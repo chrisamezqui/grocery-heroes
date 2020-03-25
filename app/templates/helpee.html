@@ -17,12 +17,20 @@
 
 <script>
   window.addEventListener( "load", function () {
+    var xmlhttp;
+    if (window.XMLHttpRequest) {
+       // code for modern browsers
+       xmlhttp = new XMLHttpRequest();
+     } else {
+       // code for old IE browsers
+       xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function(position) {
           var latitude = position.coords.latitude;
           var longitude = position.coords.longitude;
           function sendRegistrationData() {
-            const xmlhttp = new XMLHttpRequest();
             const formdata = new FormData( form );
             formdata.append("longitude", longitude)
             formdata.append("latitude", latitude)
