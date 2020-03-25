@@ -2,7 +2,7 @@
 
 <!-- THANK YOU TO SUPERHUMAN.COM FROM WHICH BERKELEY MERRIAGE PACT SHAMELESSLY STOLE THIS WEBSITE FROM WHICH WE'VE SHAMELESSY STOLEN THIS WEBSITE. THANK YOU IN PARTICULAR TO RAHUL VOHRA, WHO IS AN AMAZING PERSON :) -->
 
-<html lang="en">
+<html lang="en" style="scroll-behavior: smooth">
 <head>
   <title>Grocery Heroes</title>
   <link href="{{ url_for('static', filename='bootstrap.min.css')}}" rel="stylesheet">
@@ -43,7 +43,7 @@
           <h2>
             <div>Thank you for being a Hero</div>
           </h2>
-            <div><p>Click <a id="maplink" href="#">here</a> to go to the map.</p></div>
+            <div><p>Click <a href="#map">here</a> to go to the map.</p></div>
         </div>
         <br><br><br>
         <h2>Number of people helped: 0</h2>
@@ -180,9 +180,11 @@
          xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
       }
 
-      document.getElementById('maplink').addEventListener('click', function() {
-        document.getElementById('map').scrollIntoView({behavior:"smooth"});
-      });
+      // document.getElementById('maplink').addEventListener('click', function() {
+      //   alert("hello world");
+      //   document.getElementById('map').scrollIntoView({behavior:"smooth"});
+      //
+      // });
 
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
