@@ -199,7 +199,7 @@
       </div>
     </div>
     <script>
-      var map, infoWindow, xmlhttp, activeMarker//, helpeePhoneMap;
+      var map, infoWindow, xmlhttp, activeMarker, helpeePhoneMap;
       // For server updates.
       if (window.XMLHttpRequest) {
          // code for modern browsers
@@ -221,7 +221,7 @@
           zoom: 13
         });
         infoWindow = new google.maps.InfoWindow;
-        // helpeePhoneMap = new Map();
+        helpeePhoneMap = new Map();
 
         // Try HTML5 geolocation.
         if (navigator.geolocation) {
@@ -251,8 +251,6 @@
               let userlat = activeMarker.getPosition().lat();
 
               //replace with undo window
-              let window = document.getElementById("helperNotification");
-              let htmlCache = window.innerHTML;
               let contentString = '<div style="color:black" id="helperNotification">'+
                                   '<h2>Thank you for your help!</h2>'+
                                   '<p>Cick "Undo" if this was a mistake or click "Continue" '+
@@ -276,7 +274,7 @@
             });
 
             undoButton.addEventListener("click", function() {
-              window.innerHTML = htmlCache;
+              infoWindow.setContent(getInfoWindowDefaultContent(helpeePhoneMap.get(activeMarker)));
             });
           }
         });
@@ -293,17 +291,12 @@
           document.getElementById("map").scrollIntoView({behavior:'smooth'});
           map.panTo(this.getPosition());
           activeMarker = this;
-          let contentString = '<div style="color:black" id="helperNotification">'+
-                     '<h2>Interested in helping out?</h2>'+
-                     '<p><b>Phone Number:</b> {{ helpee.phone }}<br>If this request has been '+
-                      'completed: Click "Clear Request"</p>'+
-                     '<button id="doneButton">Clear Request</button>'+
-                     '</div>';
+          let contentString = getInfoWindowDefaultContent("{{ helpee.phone }}");
           infoWindow.setContent(contentString);
           infoWindow.open(map, this);
         });
         marker.setMap(map);
-        // helpeePhoneMap.set(marker, "{{ helpee.phone }}");
+        helpeePhoneMap.set(marker, "{{ helpee.phone }}");
         {% endfor %}
       };
 
@@ -313,6 +306,15 @@
                               'Error: Your browser doesn\'t support geolocation.');
       }
 
+      function getInfoWindowDefaultContent(phone) {
+        contentString = '<div style="color:black" id="helperNotification">'+
+                   '<h2>Interested in helping out?</h2>'+
+                   '<p><b>Phone Number:</b> '+ phone +' <br>If this request has been '+
+                    'completed: Click "Clear Request"</p>'+
+                   '<button id="doneButton">Clear Request</button>'+
+                   '</div>';
+                   return contentString;
+      }
 
     </script>
     <script async defer
