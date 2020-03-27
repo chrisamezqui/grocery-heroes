@@ -243,9 +243,9 @@
         infoWindow.addListener('domready', function() {
           document.getElementById("doneButton").addEventListener('click', function() {
             //cache user information
-            // let userphone = helpeePhoneMap.get(activeMarker);
-            // let userlng = activeMarker.getPosition().lng();
-            // let userlat = activeMarker.getPosition().lat();
+            let userphone = helpeePhoneMap.get(activeMarker);
+            let userlng = activeMarker.getPosition().lng();
+            let userlat = activeMarker.getPosition().lat();
             // activeMarker.setMap(null);
             // let formdata = new FormData();
             // formdata.append("longitude", userlng);
