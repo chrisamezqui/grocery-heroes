@@ -2947,6 +2947,7 @@ body.background-typeform {
   animation: animationFrames cubic-bezier(.4,0,.2,1) 1s
 }
 
+
 @media (max-width:767px) {
     .row {
         margin-left: 0;
@@ -2976,6 +2977,7 @@ body.background-typeform {
         color: #fff;
         text-transform: uppercase
     }
+
 }
 
 .header .sign-up .button div,.header .sign-up .placeholder-container .placeholder {
