@@ -199,7 +199,7 @@
       </div>
     </div>
     <script>
-      var map, infoWindow, xmlhttp, activeMarker, helpeePhoneMap;
+      var map, infoWindow, xmlhttp, activeMarker//, helpeePhoneMap;
       // For server updates.
       if (window.XMLHttpRequest) {
          // code for modern browsers
@@ -221,7 +221,7 @@
           zoom: 13
         });
         infoWindow = new google.maps.InfoWindow;
-        helpeePhoneMap = new Map();
+        // helpeePhoneMap = new Map();
 
         // Try HTML5 geolocation.
         if (navigator.geolocation) {
@@ -243,17 +243,36 @@
         infoWindow.addListener('domready', function() {
           document.getElementById("doneButton").addEventListener('click', function() {
             //cache user information
-            let userphone = helpeePhoneMap.get(activeMarker);
-            let userlng = activeMarker.getPosition().lng();
-            let userlat = activeMarker.getPosition().lat();
-            activeMarker.setMap(null);
+            // let userphone = helpeePhoneMap.get(activeMarker);
+            // let userlng = activeMarker.getPosition().lng();
+            // let userlat = activeMarker.getPosition().lat();
+            // activeMarker.setMap(null);
+            // let formdata = new FormData();
+            // formdata.append("longitude", userlng);
+            // formdata.append("latitude", userlat);
+            // xmlhttp.open("DELETE", "{{ url_for('main.helper')}}", true);
+            // xmlhttp.send(formdata);
 
-            //update db
-            let formdata = new FormData();
-            formdata.append("longitude", userlng);
-            formdata.append("latitude", userlat);
-            xmlhttp.open("DELETE", "{{ url_for('main.helper')}}", true);
-            xmlhttp.send(formdata);
+            //replace with undo window
+            let window = document.getElementById("helperNotification");
+            let htmlCache = window.innerHTML;
+            document.getElementById("helperNotification").innnerHTML = '<h2>Thank you for your help!</h2>'+
+                                              '<p>Cick "Undo" if this was a mistake or click "Continue" '+
+                                              ' to confirm. </p><button id="undoButton">Undo</button>' +
+                                              '  <button id="confirmButton">Confirm</button>';
+
+            document.getElementById("confirmButton").addEventListener("click", function() {
+              activeMarker.setMap(null);
+              let formdata = new FormData();
+              formdata.append("longitude", userlng);
+              formdata.append("latitude", userlat);
+              xmlhttp.open("DELETE", "{{ url_for('main.helper')}}", true);
+              xmlhttp.send(formdata);
+            });
+
+            document.getElementById("undoButton").addEventListener("click", function() {
+              window.innerHTML = htmlCache;
+            });
           });
         });
         // Place pins on map.
@@ -279,7 +298,7 @@
           infoWindow.open(map, this);
         });
         marker.setMap(map);
-        helpeePhoneMap.set(marker, "{{ helpee.phone }}");
+        // helpeePhoneMap.set(marker, "{{ helpee.phone }}");
         {% endfor %}
       };
 
