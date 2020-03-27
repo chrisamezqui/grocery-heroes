@@ -241,21 +241,27 @@
         }
 
         infoWindow.addListener('domready', function() {
-          document.getElementById("doneButton").addEventListener('click', function() {
-            //cache user information
-            // let userphone = helpeePhoneMap.get(activeMarker);
-            let userlng = activeMarker.getPosition().lng();
-            let userlat = activeMarker.getPosition().lat();
 
-            //replace with undo window
-            let window = document.getElementById("helperNotification");
-            let htmlCache = window.innerHTML;
-            let contentString = '<h2>Thank you for your help!</h2>'+
-                                              '<p>Cick "Undo" if this was a mistake or click "Continue" '+
-                                              ' to confirm. </p><button id="undoButton">Undo</button>' +
-                                              '  <button id="confirmButton">Confirm</button>';
-            infoWindow.setContent(contentString);
-          });
+          let doneButton = document.getElementById("doneButton");
+          if (doneButton !== null) {
+            doneButton.addEventListener('click', function() {
+              //cache user information
+              // let userphone = helpeePhoneMap.get(activeMarker);
+              let userlng = activeMarker.getPosition().lng();
+              let userlat = activeMarker.getPosition().lat();
+
+              //replace with undo window
+              let window = document.getElementById("helperNotification");
+              let htmlCache = window.innerHTML;
+              let contentString = '<div style="color:black" id="helperNotification">'+
+                                  '<h2>Thank you for your help!</h2>'+
+                                  '<p>Cick "Undo" if this was a mistake or click "Continue" '+
+                                  ' to confirm. </p><button id="undoButton">Undo</button>' +
+                                  '  <button id="confirmButton">Confirm</button></div>';
+
+              infoWindow.setContent(contentString);
+            });
+          }
 
           let confirmButton = document.getElementById("confirmButton");
           let undoButton = document.getElementById("undoButton");
