@@ -255,18 +255,18 @@
                                               ' to confirm. </p><button id="undoButton">Undo</button>' +
                                               '  <button id="confirmButton">Confirm</button>';
 
-            document.getElementById("confirmButton").addEventListener("click", function() {
-              activeMarker.setMap(null);
-              let formdata = new FormData();
-              formdata.append("longitude", userlng);
-              formdata.append("latitude", userlat);
-              xmlhttp.open("DELETE", "{{ url_for('main.helper')}}", true);
-              xmlhttp.send(formdata);
-            });
-
-            document.getElementById("undoButton").addEventListener("click", function() {
-              window.innerHTML = htmlCache;
-            });
+            // document.getElementById("confirmButton").addEventListener("click", function() {
+            //   activeMarker.setMap(null);
+            //   let formdata = new FormData();
+            //   formdata.append("longitude", userlng);
+            //   formdata.append("latitude", userlat);
+            //   xmlhttp.open("DELETE", "{{ url_for('main.helper')}}", true);
+            //   xmlhttp.send(formdata);
+            // });
+            //
+            // document.getElementById("undoButton").addEventListener("click", function() {
+            //   window.innerHTML = htmlCache;
+            // });
           });
         });
         // Place pins on map.
