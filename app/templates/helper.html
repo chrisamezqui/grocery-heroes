@@ -250,24 +250,29 @@
             //replace with undo window
             let window = document.getElementById("helperNotification");
             let htmlCache = window.innerHTML;
-            document.getElementById("helperNotification").innnerHTML = '<h2>Thank you for your help!</h2>'+
+            let contentString = '<h2>Thank you for your help!</h2>'+
                                               '<p>Cick "Undo" if this was a mistake or click "Continue" '+
                                               ' to confirm. </p><button id="undoButton">Undo</button>' +
                                               '  <button id="confirmButton">Confirm</button>';
+            infoWindow.setContent(contentString);
+          )};
 
-            // document.getElementById("confirmButton").addEventListener("click", function() {
-            //   activeMarker.setMap(null);
-            //   let formdata = new FormData();
-            //   formdata.append("longitude", userlng);
-            //   formdata.append("latitude", userlat);
-            //   xmlhttp.open("DELETE", "{{ url_for('main.helper')}}", true);
-            //   xmlhttp.send(formdata);
-            // });
-            //
-            // document.getElementById("undoButton").addEventListener("click", function() {
-            //   window.innerHTML = htmlCache;
-            // });
-          });
+          let confirmButton = document.getElementById("confirmButton");
+          let undoButton = document.getElementById("undoButton");
+          if (confirmButton !== null && undoButton !== null) {
+            confirmButton.addEventListener("click", function() {
+              activeMarker.setMap(null);
+              let formdata = new FormData();
+              formdata.append("longitude", userlng);
+              formdata.append("latitude", userlat);
+              xmlhttp.open("DELETE", "{{ url_for('main.helper')}}", true);
+              xmlhttp.send(formdata);
+            });
+
+            undoButton.addEventListener("click", function() {
+              window.innerHTML = htmlCache;
+            });
+          }
         });
         // Place pins on map.
         var marker;
