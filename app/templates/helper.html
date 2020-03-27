@@ -243,15 +243,9 @@
         infoWindow.addListener('domready', function() {
           document.getElementById("doneButton").addEventListener('click', function() {
             //cache user information
-            let userphone = helpeePhoneMap.get(activeMarker);
+            // let userphone = helpeePhoneMap.get(activeMarker);
             let userlng = activeMarker.getPosition().lng();
             let userlat = activeMarker.getPosition().lat();
-            // activeMarker.setMap(null);
-            // let formdata = new FormData();
-            // formdata.append("longitude", userlng);
-            // formdata.append("latitude", userlat);
-            // xmlhttp.open("DELETE", "{{ url_for('main.helper')}}", true);
-            // xmlhttp.send(formdata);
 
             //replace with undo window
             let window = document.getElementById("helperNotification");
