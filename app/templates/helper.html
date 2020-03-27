@@ -241,6 +241,9 @@
         }
 
         infoWindow.addListener('domready', function() {
+          let userlng = activeMarker.getPosition().lng();
+          let userlat = activeMarker.getPosition().lat();
+
 
           let doneButton = document.getElementById("doneButton");
           if (doneButton !== null) {
