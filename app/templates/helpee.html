@@ -244,9 +244,10 @@
                 xmlhttp.open( "POST", "{{ url_for('main.helpee') }}" );
                 xmlhttp.send(formdata);
 
-                document.getElementById("registrationBody").innerHTML = '<h2>Thank you for '+
-                'submitting your request. View or clear your request at from the '+
-                '<a href="{{ url_for('main.helper') }}" style="color:white">helper page</a>.</h2>';
+                document.getElementById("registrationBody").innerHTML = '<h2> <div>Thank you for '+
+                'submitting your request.</div> </h2>' +
+                '<div class="narrative"> <p> View or clear your request from the '+
+                '<a href="{{ url_for('main.helper') }}">helper page</a>. </p> </div>';
                 document.getElementById("registrationHeader").innerHTML = '';
               }
               let form = document.getElementById( "registrationForm" );
