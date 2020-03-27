@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 
 <!-- THANK YOU TO SUPERHUMAN.COM FROM WHICH BERKELEY MERRIAGE PACT SHAMELESSLY STOLE THIS WEBSITE FROM WHICH WE'VE SHAMELESSY STOLEN THIS WEBSITE. THANK YOU IN PARTICULAR TO RAHUL VOHRA, WHO IS AN AMAZING PERSON :) -->
-<html lang="en">
+
+<html lang="en" style="scroll-behavior: smooth">
 <head>
   <title>Grocery Heroes</title>
   <link href="{{ url_for('static', filename='bootstrap.min.css')}}" rel="stylesheet">
-
   <link href="{{ url_for('static', filename='main.css')}}" rel="stylesheet">
 
-  <body class="main vsc-initialized">
+  <style>
+    #map {
+      height: 100%;
+    }
+  </style>
+</head>
 
+  <body class="main vsc-initialized">
     <div id="navbar-container" class="update-navbar-transparent">
       <nav class="navbar navbar-fixed-top">
         <div class="container-fluid">
@@ -19,7 +25,7 @@
           <div class="row">
             <div class="col-xs-offset-1 col-xs-12 col-lg-offset-4 col-lg-4 logo">
               <h2>
-                  <a href="{{ url_for('main.index')}}"><div style="cursor: pointer"><strong>Grocery Heroes</strong></div></a>
+                <a href="{{ url_for('main.index')}}"><div style="cursor: pointer"><strong>Grocery Heroes</strong></div></a>
               </h2>
             </div>
           </div>
@@ -28,44 +34,65 @@
     </div>
 
 
+
     <div class="container-fluid be-brilliant-with-people update-navbar-white update-navbar-show-button update-navbar-hide-take-me-to-superhuman">
       <div class="row">
         <div class="col-xs-offset-1 col-xs-10 col-sm-offset-3 col-sm-6 col-lg-offset-1 col-lg-5">
         <div class="wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
           <div class="separator"></div>
-
           <h2>
-            <div id="registrationHeader">Please tell us about yourself</div>
+            <div>Thank you for being a Hero!</div>
           </h2>
-          <div id="registrationBody" class="narrative">
+          <br>
+          <br>
+          <div class="narrative">
             <p>
-                Your phone number and location will be available on the <a href="{{ url_for('main.helper') }}" style="color:white">helper page</a> for Heroes to see until your request has been completed.
+                1. Find someone on the map below who needs help in a convenient location for you. Mapped locations are only approximate.
             </p>
-          <br>
-          <br>
-          <form id="registrationForm">
-            <label for="phone">Phone Number:</label><br>
-            <input style="color:black" type="text" id="phone" name="phone" placeholder="(012) 345-6789" pattern="[(][0-9]{3}[)]\s[0-9]{3}-[0-9]{4}"><br>
+            <p>
+                2. Contact the number listed. Ask: <br>
+                <br>  🞄 What they need
+                <br>  🞄 What their exact address is
+                <br>  🞄 How they plan to reimburse you (e.g. <a href="https://www.paypal.com/us/webapps/mpp/account-selection?&gclid=EAIaIQobChMI2vq72syq6AIVSh6tBh2r2wRpEAAYASADEgK-EvD_BwE&gclsrc=aw.ds">PayPal</a> or <a href = "https://venmo.com/signup">Venmo</a>).
+            </p>
+            <p>
+                3. If you decide to help, be sure to clear this individual's request.
+            </p>
+            <p>
+                4. Get their groceries, drop them off on their doorstep, and get reimbursed. To prevent contamination, make sure not to open the door.
+            </p>
+            <p>
+                5. Congrats, you’re a Hero!
+            </p>
             <br>
-            <input type="submit" value="Submit" id="registrationSubmit">
-          </form>
-          <p>
-              <br> <br> If you wish to clear your request, please do so from the <a href="{{ url_for('main.helper') }}" style="color:white">helper page</a>.
-          </p>
+            <br>
+            <p>
+              Click <a href="#map">here</a> to go to get started.
+            </p>
+          </div>
         </div>
-        </div>
-        </div>
+      </div>
+
         <div class="col-sm-12 col-md-6 snooze">
           <div class="row">
               <div class="col-xs-offset-1 col-xs-10 col-sm-offset-3 col-sm-6 col-md-offset-3 col-md-8">
               <div class="wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
-                <img src="{{ url_for('static', filename='imgs/falling_tomatoes.png') }}">
+                <img src="{{ url_for('static', filename='imgs/yellow_flower.png') }}">
+
               </div>
             </div>
           </div>
         </div>
       </div>
+      <div class="down-arrow"></div>
     </div>
+
+    <div class="container-fluid" style="height:1000px;">
+      <!-- <div class="row-fluid" style="height:100%"> -->
+        <div id="map"></div>
+      <!-- </div> -->
+=    </div>
+
 
 
     <div class="container-fluid introduction update-navbar-white update-navbar-show-button update-navbar-hide-take-me-to-superhuman">
@@ -76,84 +103,41 @@
             <div class="wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
               <div class="separator"></div>
               <h2>
-                <div>How it works:</div>
+                <div>What if I can't get reimbursed?</div>
               </h2>
+              <h3>
+                <div></div>
+              </h3>
               <div class="narrative">
-                <p>
-                    1. Fill out the form above. Requests can be seen from <a href="{{ url_for('main.helper') }}">helper page</a>.
+                <p>If for some reason you are not being reimbursed, please simply return the groceries.
+                Unfortunately, since we are just a couple of college students, we don’t have a good way of reimbursing you if you don’t get reimbursed by the individual you were shopping for.
+                However, please contact us if you have issues, and we will do our best to help resolve them.</p>
+              <!-- <h2>Number of people helped: 354</h2> -->
+                <!-- <p>
+                    1. Find someone who needs help in a convenient location for you
                 </p>
                 <p>
-                    2. Prepare your grocery list and an electronic method to reimburse your helper (e.g. <a href="https://www.paypal.com/us/webapps/mpp/account-selection?&gclid=EAIaIQobChMI2vq72syq6AIVSh6tBh2r2wRpEAAYASADEgK-EvD_BwE&gclsrc=aw.ds">PayPal</a> or <a href = "https://venmo.com/signup">Venmo</a>).
+                    2. Contact the number listed. Ask: <br>
+                    <br>  🞄 What they need
+                    <br>  🞄 What their exact address is
+                    <br>  🞄 How they plan to reimburse you (e.g. <a href="https://www.paypal.com/us/webapps/mpp/account-selection?&gclid=EAIaIQobChMI2vq72syq6AIVSh6tBh2r2wRpEAAYASADEgK-EvD_BwE&gclsrc=aw.ds">PayPal</a> or <a href = "https://venmo.com/signup">Venmo</a>).
                 </p>
                 <p>
-                    3. Wait for a helper to contact you. When one does, tell them: <br>
-                    <br>  🞄 What you need
-                    <br>  🞄 Your exact address
-                    <br>  🞄 How you plan to reimburse them.
+                    3. If you decide to help, be sure to clear this individual's request.
                 </p>
                 <p>
-                    4. Reimburse your helper as they leave your groceries on your doorstep. Do not open your door to prevent contamination.
+                    4. Get their groceries and drop them off on their doorstep <em> after </em> being reimbursed. To prevent contamination, make sure not to open the door.
                 </p>
                 <p>
-                    5. Send your helper a thank you message!
-                </p>
+                    5. Congrats, you’re a Hero!
+                </p> -->
               </div>
             </div>
             </div>
           </div>
         </div>
-        <div class="col-xs-12 col-lg-pull-7 col-lg-offset-0 col-lg-5 wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
-          <img src="{{ url_for('static', filename='imgs/pumpkins.png') }}">
-
-        </div>
-      </div>
-    </div>
-
-    <div class="container-fluid two-up update-navbar-white update-navbar-show-button update-navbar-hide-take-me-to-superhuman">
-      <div class="row">
-        <div class="col-sm-12 col-md-6 scheduled-emails">
-          <div class="row">
-            <div class="overlay">
-              <div class="col-xs-offset-1 col-xs-10 col-sm-offset-3 col-sm-6 col-md-offset-2 col-md-8">
-              <div class="wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
-                <div class="separator"></div>
-                <h2>
-                  <div>I am having trouble paying for my groceries. What should I do?</div>
-                </h2>
-                <h3>
-                  <div></div>
-                </h3>
-                <div class="narrative">
-                  <p>
-                    Please contact us, and we will do our best to figure something out.
-                  </p>
-                </div>
-              </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-12 col-md-6 snooze">
-          <div class="row">
-            <div class="overlay">
-              <div class="col-xs-offset-1 col-xs-10 col-sm-offset-3 col-sm-6 col-md-offset-2 col-md-8">
-              <div class="wow fadeIn" style="visibility: visible; animation-name: fadeIn;">
-                <div class="separator"></div>
-                <h2>
-                    <div>How do I ensure I stay safe?</div>
-                </h2>
-                <h3>
-                  <div></div>
-                </h3>
-                <div class="narrative">
-                  <p>
-                    Please do not open your door to your helper. We recommend reimbursing electronically such that your helper can simply leave your groceries on your doorstep.
-                  </p>
-                </div>
-              </div>
-              </div>
-            </div>
-          </div>
+        <div class="col-xs-12 col-lg-pull-8 col-lg-offset-0 col-lg-5 wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+          <img src="{{ url_for('static', filename='imgs/pink_flower.png') }}">
         </div>
       </div>
     </div>
@@ -215,53 +199,39 @@
       </div>
     </div>
     <script>
-      window.addEventListener( "load", function () {
-        var xmlhttp;
-        if (window.XMLHttpRequest) {
-           // code for modern browsers
-           xmlhttp = new XMLHttpRequest();
-         } else {
-           // code for old IE browsers
-           xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
+      var map, infoWindow, xmlhttp, activeMarker, helpeePhoneMap;
+      // For server updates.
+      if (window.XMLHttpRequest) {
+         // code for modern browsers
+         xmlhttp = new XMLHttpRequest();
+       } else {
+         // code for old IE browsers
+         xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+      }
 
+      // document.getElementById('maplink').addEventListener('click', function() {
+      //   alert("hello world");
+      //   document.getElementById('map').scrollIntoView({behavior:"smooth"});
+      //
+      // });
+
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: -34.397, lng: 150.644},
+          zoom: 13
+        });
+        infoWindow = new google.maps.InfoWindow;
+        helpeePhoneMap = new Map();
+
+        // Try HTML5 geolocation.
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(function(position) {
-              var latitude = position.coords.latitude;
-              var longitude = position.coords.longitude;
-              function sendRegistrationData() {
-                const formdata = new FormData( form );
-                formdata.append("longitude", longitude)
-                formdata.append("latitude", latitude)
+            var pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
 
-                xmlhttp.addEventListener( "load", function(event) {
-                } );
-
-                xmlhttp.addEventListener( "error", function( event ) {
-                  alert( 'Oops! Something went wrong. :o' );
-                } );
-
-                xmlhttp.open( "POST", "{{ url_for('main.helpee') }}" );
-                xmlhttp.send(formdata);
-
-                document.getElementById("registrationBody").innerHTML = '<h2>Thank you for '+
-                'submitting your request. View or clear your request at from the '+
-                '<a href="{{ url_for('main.helper') }}" style="color:white">helper page</a>.</h2>';
-                document.getElementById("registrationHeader").innerHTML = '';
-              }
-              let form = document.getElementById( "registrationForm" );
-              form.addEventListener( "submit", function ( event ) {
-                event.preventDefault();
-                console.log(form.elements);
-                console.log(form.elements[0]);
-                console.log(form.elements[0].value);
-                if (form.elements[0].value == 0) {
-                  alert("Please enter your phone number before clicking submit.");
-                } else {
-                  sendRegistrationData();
-                }
-              } );
-
+            map.setCenter(pos);
           }, function() {
             handleLocationError(true);
           });
@@ -270,13 +240,59 @@
           handleLocationError(false);
         }
 
-        function handleLocationError(browserHasGeolocation) {
-          alert(browserHasGeolocation ?
-                                'Error: The Geolocation service failed. Grocery Heroes needs your location to continue.' :
-                                'Error: Your browser doesn\'t support geolocation. Grocery Heroes needs your location to continue.');
+        infoWindow.addListener('domready', function() {
+          document.getElementById("doneButton").addEventListener('click', function() {
+            //cache user information
+            let userphone = helpeePhoneMap.get(activeMarker);
+            let userlng = activeMarker.getPosition().lng();
+            let userlat = activeMarker.getPosition().lat();
+            activeMarker.setMap(null);
 
-        }
-      });
+            //update db
+            let formdata = new FormData();
+            formdata.append("longitude", userlng);
+            formdata.append("latitude", userlat);
+            xmlhttp.open("DELETE", "{{ url_for('main.helper')}}", true);
+            xmlhttp.send(formdata);
+          });
+        });
+        // Place pins on map.
+        var marker;
+        {% for helpee in local_helpees %}
+        marker = new google.maps.Marker({
+          position: {lat: {{ helpee.latitude }}, lng:{{ helpee. longitude }}},
+          map: map,
+          title: 'Somebody could use some help here!'
+        });
+
+        marker.addListener('click', function() {
+          document.getElementById("map").scrollIntoView({behavior:'smooth'});
+          map.panTo(this.getPosition());
+          activeMarker = this;
+          let contentString = '<div style="color:black" id="helperNotification">'+
+                     '<h2>Interested in helping out?</h2>'+
+                     '<p><b>Phone Number:</b> {{ helpee.phone }}<br>If this request has been '+
+                      'completed: Click "Clear Request"</p>'+
+                     '<button id="doneButton">Clear Request</button>'+
+                     '</div>';
+          infoWindow.setContent(contentString);
+          infoWindow.open(map, this);
+        });
+        marker.setMap(map);
+        helpeePhoneMap.set(marker, "{{ helpee.phone }}");
+        {% endfor %}
+      };
+
+      function handleLocationError(browserHasGeolocation) {
+        alert(browserHasGeolocation ?
+                              'Error: The Geolocation service failed.' :
+                              'Error: Your browser doesn\'t support geolocation.');
+      }
+
+
     </script>
-  </body>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key={{ gmapi_key }}&callback=initMap">
+    </script>
+</body>
 </html>
