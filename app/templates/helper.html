@@ -312,7 +312,7 @@
           infoWindow.open(map, this);
         });
         marker.setMap(map);
-        console.log({{ helpee.phones }}); //assume its a list?
+        console.log('{{ helpee.phones }}'); //assume its a list?
         helpeePhoneMap.set(marker, {{ helpee.phones }});
         {% endfor %}
       };
