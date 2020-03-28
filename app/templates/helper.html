@@ -243,13 +243,14 @@
         infoWindow.addListener('domready', function() {
           let userlng = activeMarker.getPosition().lng();
           let userlat = activeMarker.getPosition().lat();
-
+          let userphone = helpeePhoneMap.get(activeMarker);
 
           let doneButton = document.getElementById("doneButton");
           if (doneButton !== null) {
             doneButton.addEventListener('click', function() {
               //cache user information
-              // let userphone = helpeePhoneMap.get(activeMarker);
+              let userphones = helpeePhoneMap.get(activeMarker);
+              let userphone = this.name;
               let userlng = activeMarker.getPosition().lng();
               let userlat = activeMarker.getPosition().lat();
 
@@ -268,14 +269,17 @@
           let undoButton = document.getElementById("undoButton");
           if (confirmButton !== null && undoButton !== null) {
             confirmButton.addEventListener("click", function() {
-              activeMarker.setMap(null);
+              if userphones.length == 1:
+                activeMarker.setMap(null);
               let formdata = new FormData();
               formdata.append("longitude", userlng);
               formdata.append("latitude", userlat);
+              formadata.append("phone", userphone);
               xmlhttp.open("DELETE", "{{ url_for('main.helper')}}", true);
               xmlhttp.send(formdata);
+              helpeePhoneMap.delete(userphone);
+              infoWindow.setContent(getInfoWindowDefaultContent(helpeePhoneMap.get(activeMarker)));
             });
-
             undoButton.addEventListener("click", function() {
               infoWindow.setContent(getInfoWindowDefaultContent(helpeePhoneMap.get(activeMarker)));
             });
@@ -283,6 +287,13 @@
         });
         // Place pins on map.
         var marker;
+        /*
+        local_helpees : {
+          [helpee]: {
+            latitude, longitude, [phones]
+        }
+      }
+        */
         {% for helpee in local_helpees %}
         marker = new google.maps.Marker({
           position: {lat: {{ helpee.latitude }}, lng:{{ helpee. longitude }}},
@@ -294,12 +305,14 @@
           document.getElementById("map").scrollIntoView({behavior:'smooth'});
           map.panTo(this.getPosition());
           activeMarker = this;
-          let contentString = getInfoWindowDefaultContent("{{ helpee.phone }}");
+          let phones = helpeePhoneMap.get(this);
+          let contentString = getInfoWindowDefaultContent(phones);
           infoWindow.setContent(contentString);
           infoWindow.open(map, this);
         });
         marker.setMap(map);
-        helpeePhoneMap.set(marker, "{{ helpee.phone }}");
+        console.log({{ helpee.phones }}); //assume its a list?
+        helpeePhoneMap.set(marker, {{ helpee.phones }});
         {% endfor %}
       };
 
@@ -309,14 +322,20 @@
                               'Error: Your browser doesn\'t support geolocation.');
       }
 
-      function getInfoWindowDefaultContent(phone) {
-        contentString = '<div style="color:black" id="helperNotification">'+
+      function getInfoWindowDefaultContent(phones) {
+        let contentString = '<div style="color:black" id="helperNotification">'+
                    '<h2>Interested in helping out?</h2>'+
-                   '<p><b>Phone Number:</b> '+ phone +' <br>If this request has been '+
-                    'completed: Click "Clear Request"</p>'+
-                   '<button id="doneButton">Clear Request</button>'+
+                   '<p><b>Phone Number(s):</b><br><ul>';
+        function addContent(phone, content) {
+          content += 'li>'+ phone + ' <button name="'+phone+'"id="doneButton">Clear Request</button></li>';
+        }
+
+        phones.forEach(addContent, contentString);
+
+        contentString += ' </ul><br>If a request has been '+
+                    'completed: Click "Clear Request" next to the phone number you called.</p>'+
                    '</div>';
-                   return contentString;
+        return contentString;
       }
 
     </script>

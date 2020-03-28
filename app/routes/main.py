@@ -30,17 +30,17 @@ def helpee():
         longitude = float(request.form['longitude'])
         latitude = float(request.form['latitude'])
 
-        user = User.query.filter(and_(User.longitude==longitude, User.latitude==latitude)).first()
-        if user is not None:
-            user.phone = phone
-        else:
-            new_helpee = User(
-                phone=phone,
-                longitude=longitude,
-                latitude=latitude
-            )
+        # user = User.query.filter(and_(User.longitude==longitude, User.latitude==latitude)).first()
+        # if user is not None:
+        #     user.phone = phone
+        # else:
+        new_helpee = User(
+            phone=phone,
+            longitude=longitude,
+            latitude=latitude
+        )
 
-            db.session.add(new_helpee)
+        db.session.add(new_helpee)
         db.session.commit()
 
         return jsonify(success=True)
@@ -52,7 +52,8 @@ def helper():
     if request.method == 'DELETE':
         longitude = float(request.form['longitude'])
         latitude = float(request.form['latitude'])
-        user = User.query.filter(and_(User.longitude==longitude, User.latitude==latitude)).first()
+        phone = request.form['phone']
+        users = User.query.filter(and_(User.longitude==longitude, User.latitude==latitude, User.phone==phone)).first()
         db.session.delete(user)
         db.session.commit()
 
@@ -63,11 +64,21 @@ def helper():
         .filter(User.latitude != None)\
         .all()
 
+    locationMap = {}
+    for helpee in local_helpees:
+        key = (helpee.longitude, helpee.latitude)
+        if key in locationMap:
+            locationMap[key].append(helpee.phone)
+        else:
+            locationMap[key] = [helpee.phone]
+
+    local_helpees_grouped = [({'longitude' : loc[0], 'latitude' : loc[1], 'phones': phone}) for loc, phone in locationMap.items()]
+
     context = {
-        'local_helpees' : local_helpees,
+        'local_helpees' : local_helpees_grouped,
         'gmapi_key' : GOOGLE_MAPS_API_KEY
     }
-    return render_template('helper.html', **context)
+    return render_template('helper.html', **`context`)
 
 # @main.route('/helper/map/marker')
 # def verify_marker():
