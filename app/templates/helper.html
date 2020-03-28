@@ -301,7 +301,8 @@
       function getInfoWindowDefaultContent(phones) {
         console.log(phones);
         function addContent(phone, content) {
-          content += '<li>'+ phone + ' <button name="'+phone+'"id="doneButton">Clear Request</button></li>';
+          let newContent = '<li>'+ phone + ' <button name="'+phone+'"id="doneButton">Clear Request</button></li>';
+          content.concat(newContent);
         }
         let contentString = '<div style="color:black" id="helperNotification">'+
                    '<h2>Interested in helping out?</h2>'+
