@@ -88,10 +88,8 @@
     </div>
 
     <div class="container-fluid" style="height:1000px;">
-      <!-- <div class="row-fluid" style="height:100%"> -->
         <div id="map"></div>
-      <!-- </div> -->
-=    </div>
+    </div>
 
 
 
@@ -112,25 +110,6 @@
                 <p>If for some reason you are not being reimbursed, please simply return the groceries.
                 Unfortunately, since we are just a couple of college students, we don’t have a good way of reimbursing you if you don’t get reimbursed by the individual you were shopping for.
                 However, please contact us if you have issues, and we will do our best to help resolve them.</p>
-              <!-- <h2>Number of people helped: 354</h2> -->
-                <!-- <p>
-                    1. Find someone who needs help in a convenient location for you
-                </p>
-                <p>
-                    2. Contact the number listed. Ask: <br>
-                    <br>  🞄 What they need
-                    <br>  🞄 What their exact address is
-                    <br>  🞄 How they plan to reimburse you (e.g. <a href="https://www.paypal.com/us/webapps/mpp/account-selection?&gclid=EAIaIQobChMI2vq72syq6AIVSh6tBh2r2wRpEAAYASADEgK-EvD_BwE&gclsrc=aw.ds">PayPal</a> or <a href = "https://venmo.com/signup">Venmo</a>).
-                </p>
-                <p>
-                    3. If you decide to help, be sure to clear this individual's request.
-                </p>
-                <p>
-                    4. Get their groceries and drop them off on their doorstep <em> after </em> being reimbursed. To prevent contamination, make sure not to open the door.
-                </p>
-                <p>
-                    5. Congrats, you’re a Hero!
-                </p> -->
               </div>
             </div>
             </div>
@@ -309,6 +288,8 @@
         marker.setMap(map);
         helpeePhoneMap.set(marker, phones);
         {% endfor %}
+
+        console.log(helpeePhoneMap);
       };
 
       function handleLocationError(browserHasGeolocation) {
@@ -318,6 +299,7 @@
       }
 
       function getInfoWindowDefaultContent(phones) {
+        console.log(phones);
         function addContent(phone, content) {
           content += '<li>'+ phone + ' <button name="'+phone+'"id="doneButton">Clear Request</button></li>';
         }
