@@ -209,12 +209,6 @@
          xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
       }
 
-      // document.getElementById('maplink').addEventListener('click', function() {
-      //   alert("hello world");
-      //   document.getElementById('map').scrollIntoView({behavior:"smooth"});
-      //
-      // });
-
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: -34.397, lng: 150.644},
@@ -240,6 +234,7 @@
           handleLocationError(false);
         }
 
+        //Add event listeners to the buttons that can be in the infowindow
         infoWindow.addListener('domready', function() {
           let userlng = activeMarker.getPosition().lng();
           let userlat = activeMarker.getPosition().lat();
@@ -286,15 +281,11 @@
             });
           }
         });
+
+
         // Place pins on map.
         var marker;
-        /*
-        local_helpees : {
-          [helpee]: {
-            latitude, longitude, [phones]
-        }
-      }
-        */
+        var phones;
         {% for helpee in local_helpees %}
         marker = new google.maps.Marker({
           position: {lat: {{ helpee.latitude }}, lng:{{ helpee. longitude }}},
@@ -302,18 +293,21 @@
           title: 'Somebody could use some help here!'
         });
 
+        phones = [];
+        {% for phone in helpee.phones %}
+        phones.push('{{ phone }}');
+        {% endfor %}
+
         marker.addListener('click', function() {
           document.getElementById("map").scrollIntoView({behavior:'smooth'});
           map.panTo(this.getPosition());
           activeMarker = this;
-          let phones = helpeePhoneMap.get(this);
-          let contentString = getInfoWindowDefaultContent(phones);
+          let contentString = getInfoWindowDefaultContent(helpeePhoneMap.get(this));
           infoWindow.setContent(contentString);
           infoWindow.open(map, this);
         });
         marker.setMap(map);
-        console.log('{{ helpee.phones }}'); //assume its a list?
-        helpeePhoneMap.set(marker, {{ helpee.phones }});
+        helpeePhoneMap.set(marker, phones);
         {% endfor %}
       };
 
