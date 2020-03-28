@@ -10,19 +10,6 @@ main = Blueprint('main', __name__)
 def index():
     return render_template('home.html')
 
-# @main.route('/helper')
-# def helper():
-#     local_helpees = User.query\
-#         .filter(User.longitude != None)\
-#         .filter(User.latitude != None)\
-#         .all()
-#
-#     context = {
-#         'local_helpees' : local_helpees
-#     }
-#
-#     return render_template('helper.html', **context)
-
 @main.route('/helpee', methods=['GET', 'POST'])
 def helpee():
     if request.method == 'POST':
