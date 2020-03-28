@@ -44,7 +44,7 @@ def helper():
         db.session.delete(user)
         db.session.commit()
 
-        return ''
+        return jsonify(success=True), 200
 
     local_helpees = User.query\
         .filter(User.longitude != None)\

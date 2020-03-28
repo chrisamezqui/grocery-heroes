@@ -242,25 +242,32 @@
           let confirmButton = document.getElementById("confirmButton");
           let undoButton = document.getElementById("undoButton");
           if (confirmButton !== null && undoButton !== null) {
+
+            //logic from request removal confirmation
             confirmButton.addEventListener("click", function() {
+              //Update front-end data stores
+              helpeePhoneMap.delete(userphone);
               if (userphones.length == 1) {
                 activeMarker.setMap(null);
+              } else {
+                infoWindow.setContent(getInfoWindowDefaultContent(helpeePhoneMap.get(activeMarker)));
               }
+
+              //Delete record form database
               let formdata = new FormData();
               formdata.append("longitude", userlng);
               formdata.append("latitude", userlat);
               formadata.append("phone", userphone);
               xmlhttp.open("DELETE", "{{ url_for('main.helper')}}", true);
               xmlhttp.send(formdata);
-              helpeePhoneMap.delete(userphone);
-              infoWindow.setContent(getInfoWindowDefaultContent(helpeePhoneMap.get(activeMarker)));
             });
+
+            //logic to undo request removal
             undoButton.addEventListener("click", function() {
               infoWindow.setContent(getInfoWindowDefaultContent(helpeePhoneMap.get(activeMarker)));
             });
           }
         });
-
 
         // Place pins on map.
         var marker;
