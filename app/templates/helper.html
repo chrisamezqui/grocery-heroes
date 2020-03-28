@@ -299,20 +299,17 @@
       }
 
       function getInfoWindowDefaultContent(phones) {
-        console.log(phones);
-        function addContent(phone, content) {
-          let newContent = '<li>'+ phone + ' <button name="'+phone+'"id="doneButton">Clear Request</button></li>';
-          content.concat(newContent);
-        }
         let contentString = '<div style="color:black" id="helperNotification">'+
                    '<h2>Interested in helping out?</h2>'+
                    '<p><b>Phone Number(s):</b><br><ul>';
+        for (let i = 0; i < phones.length; i++) {
+          let phone = phones[i];
+          contentString += '<li>'+ phone + ' <button name="'+phone+'"id="doneButton">Clear Request</button></li>';
+        }
 
-        phones.forEach(addContent, contentString);
         contentString += ' </ul><br>If a request has been '+
                     'completed: Click "Clear Request" next to the phone number you called.</p>'+
                    '</div>';
-        console.log(contentString);
         return contentString;
       }
 
