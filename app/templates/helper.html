@@ -269,8 +269,9 @@
           let undoButton = document.getElementById("undoButton");
           if (confirmButton !== null && undoButton !== null) {
             confirmButton.addEventListener("click", function() {
-              if userphones.length == 1:
+              if (userphones.length == 1) {
                 activeMarker.setMap(null);
+              }
               let formdata = new FormData();
               formdata.append("longitude", userlng);
               formdata.append("latitude", userlat);
