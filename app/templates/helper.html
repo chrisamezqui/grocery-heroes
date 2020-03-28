@@ -257,7 +257,7 @@
               let formdata = new FormData();
               formdata.append("longitude", userlng);
               formdata.append("latitude", userlat);
-              formadata.append("phone", userphone);
+              formdata.append("phone", userphone);
               xmlhttp.open("DELETE", "{{ url_for('main.helper')}}", true);
               xmlhttp.send(formdata);
             });
