@@ -247,7 +247,7 @@
             confirmButton.addEventListener("click", function() {
               //Update front-end data stores
               helpeePhoneMap.delete(userphone);
-              if (userphones.length == 1) {
+              if (helpeePhoneMap.get(activeMarker).length == 0) {
                 activeMarker.setMap(null);
               } else {
                 infoWindow.setContent(getInfoWindowDefaultContent(helpeePhoneMap.get(activeMarker)));
