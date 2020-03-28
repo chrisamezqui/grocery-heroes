@@ -78,7 +78,7 @@ def helper():
         'local_helpees' : local_helpees_grouped,
         'gmapi_key' : GOOGLE_MAPS_API_KEY
     }
-    return render_template('helper.html', **`context`)
+    return render_template('helper.html', **context)
 
 # @main.route('/helper/map/marker')
 # def verify_marker():
