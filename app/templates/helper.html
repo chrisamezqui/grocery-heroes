@@ -215,19 +215,9 @@
 
         //Add event listeners to the buttons that can be in the infowindow
         infoWindow.addListener('domready', function() {
-          let userlng = activeMarker.getPosition().lng();
-          let userlat = activeMarker.getPosition().lat();
-          let userphone = helpeePhoneMap.get(activeMarker);
-
           let doneButton = document.getElementById("doneButton");
           if (doneButton !== null) {
             doneButton.addEventListener('click', function() {
-              //cache user information
-              let userphones = helpeePhoneMap.get(activeMarker);
-              let userphone = this.name;
-              let userlng = activeMarker.getPosition().lng();
-              let userlat = activeMarker.getPosition().lat();
-
               //replace with undo window
               let contentString = '<div style="color:black" id="helperNotification">'+
                                   '<h2>Thank you for your help!</h2>'+
@@ -246,6 +236,7 @@
             //logic from request removal confirmation
             confirmButton.addEventListener("click", function() {
               //Update front-end data stores
+              let userphone = confirmButton.name;
               let userphones = helpeePhoneMap.get(activeMarker);
               userphones.splice(userphones.indexOf(userphone), 1);
 
@@ -256,6 +247,8 @@
               }
 
               //Delete record form database
+              let userlng = activeMarker.getPosition().lng();
+              let userlat = activeMarker.getPosition().lat();
               let formdata = new FormData();
               formdata.append("longitude", userlng);
               formdata.append("latitude", userlat);
