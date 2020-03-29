@@ -40,7 +40,7 @@ def helper():
         longitude = float(request.form['longitude'])
         latitude = float(request.form['latitude'])
         phone = request.form['phone']
-        users = User.query.filter(and_(User.longitude==longitude, User.latitude==latitude, User.phone==phone)).first()
+        user = User.query.filter(and_(User.longitude==longitude, User.latitude==latitude, User.phone==phone)).first()
         db.session.delete(user)
         db.session.commit()
 
