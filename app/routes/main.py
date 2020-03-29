@@ -17,10 +17,11 @@ def helpee():
         longitude = float(request.form['longitude'])
         latitude = float(request.form['latitude'])
 
-        # user = User.query.filter(and_(User.longitude==longitude, User.latitude==latitude)).first()
-        # if user is not None:
-        #     user.phone = phone
-        # else:
+        #avoid exact duplicates in the database
+        user = User.query.filter(and_(User.longitude==longitude, User.latitude==latitude, User.phone=phone)).first()
+        if user is not None:
+            return jsonify(success=False)
+
         new_helpee = User(
             phone=phone,
             longitude=longitude,
