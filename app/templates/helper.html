@@ -219,6 +219,8 @@
           if (doneButton !== null) {
             doneButton.addEventListener('click', function() {
               //replace with undo window
+              var userphone = doneButton.name;
+              console.log(userphone);
               let contentString = '<div style="color:black" id="helperNotification">'+
                                   '<h2>Thank you for your help!</h2>'+
                                   '<p>Cick "Undo" if this was a mistake or click "Continue" '+
@@ -226,6 +228,7 @@
                                   '  <button id="confirmButton">Confirm</button></div>';
 
               infoWindow.setContent(contentString);
+
             });
           }
 
@@ -236,7 +239,6 @@
             //logic from request removal confirmation
             confirmButton.addEventListener("click", function() {
               //Update front-end data stores
-              let userphone = confirmButton.name;
               let userphones = helpeePhoneMap.get(activeMarker);
               userphones.splice(userphones.indexOf(userphone), 1);
 
