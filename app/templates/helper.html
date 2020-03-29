@@ -229,7 +229,7 @@
               let userlat = activeMarker.getPosition().lat();
 
               //replace with undo window
-              let contentString = '<div style="color:black" class="narrative" id="helperNotification">'+
+              let contentString = '<div style="color:black" id="helperNotification">'+
                                   '<h2>Thank you for your help!</h2>'+
                                   '<p>Cick "Undo" if this was a mistake or click "Continue" '+
                                   ' to confirm. </p><button id="undoButton">Undo</button>' +
@@ -308,7 +308,7 @@
       }
 
       function getInfoWindowDefaultContent(phones) {
-        let contentString = '<div style="color:black" class="narrative" id="helperNotification">'+
+        let contentString = '<div style="color:black" id="helperNotification">'+
                    '<h2>Interested in helping out?</h2>'+
                    '<p><b>Phone Number(s):</b><br><ul>';
         for (let i = 0; i < phones.length; i++) {

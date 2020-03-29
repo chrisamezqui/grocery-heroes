@@ -7398,20 +7398,3 @@ span.rev {
   background-color: #4CAF50;
    color: white;
  }
-
- #doneButton
- {
-   color:black;
-   border: none;
-   font-family: "Avenir LT Std Book",sans-serif;
-   border-radius: 4px;
-   background-color: white;
-   transition-duration: 0.4s;
-   padding: 6px 30px;
- }
-
- #doneButton:hover
- {
-   background-color: #4CAF50;
-    color: white;
- }
