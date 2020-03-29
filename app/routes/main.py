@@ -3,7 +3,8 @@ from app.extensions import db
 from app.models import User
 from app.keys import *
 from sqlalchemy import and_
-from flask_socketio import SocketIO, emit
+from flask_socketio import emit
+# from app import socketio
 
 main = Blueprint('main', __name__)
 
@@ -32,6 +33,7 @@ def helpee():
         db.session.add(new_helpee)
         db.session.commit()
 
+        emit('add helpee', {data: 'test'}, broadcast=True)
         return jsonify(success=True)
 
     return render_template('helpee.html')
@@ -46,6 +48,7 @@ def helper():
         db.session.delete(user)
         db.session.commit()
 
+        emit('remove helpee', {data: 'test'}, broadcast=True)
         return jsonify(success=True), 200
 
     local_helpees = User.query\

@@ -6,14 +6,10 @@ from .models import User
 from .routes.main import main
 from flask_socketio import SocketIO
 
-socketio = None
+app = Flask(__name__)
+socketio = SocketIO(app)
 
 def create_app(config_file='settings.py'):
-    app = Flask(__name__)
-    
-    global socketio
-    socketio = SocketIO(app)
-
     app.config.from_pyfile(config_file)
 
     db.init_app(app)
