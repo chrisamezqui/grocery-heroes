@@ -215,11 +215,12 @@
 
         //Add event listeners to the buttons that can be in the infowindow
         infoWindow.addListener('domready', function() {
+          var userphone;
           let doneButton = document.getElementById("doneButton");
           if (doneButton !== null) {
             doneButton.addEventListener('click', function() {
               //replace with undo window
-              var userphone = doneButton.name;
+              userphone = doneButton.name;
               console.log(userphone);
               let contentString = '<div style="color:black" id="helperNotification">'+
                                   '<h2>Thank you for your help!</h2>'+
