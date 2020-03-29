@@ -297,8 +297,6 @@
         marker.setMap(map);
         helpeePhoneMap.set(marker, phones);
         {% endfor %}
-
-        console.log(helpeePhoneMap);
       };
 
       function handleLocationError(browserHasGeolocation) {
@@ -319,6 +317,7 @@
         contentString += ' </ul><br>If a request has been '+
                     'completed: Click "Clear Request" next to the phone number you called.</p>'+
                    '</div>';
+        console.log(contentString);
         return contentString;
       }
 
