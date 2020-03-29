@@ -4,6 +4,7 @@ from .commands import create_tables
 from .extensions import db
 from .models import User
 from .routes.main import main
+from flask_socketio import SocketIO
 
 socketio = None
 
