@@ -246,8 +246,10 @@
             //logic from request removal confirmation
             confirmButton.addEventListener("click", function() {
               //Update front-end data stores
-              helpeePhoneMap.delete(userphone);
-              if (helpeePhoneMap.get(activeMarker).length == 0) {
+              let userphones = helpeePhoneMap.get(activeMarker);
+              userphones.splice(userphones.indexOf(userphone), 1);
+
+              if (userphones.length == 0) {
                 activeMarker.setMap(null);
               } else {
                 infoWindow.setContent(getInfoWindowDefaultContent(helpeePhoneMap.get(activeMarker)));
