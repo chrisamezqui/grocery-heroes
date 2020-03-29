@@ -3,7 +3,7 @@ from app.extensions import db
 from app.models import User
 from app.keys import *
 from sqlalchemy import and_
-from flask.ext.socketio import SocketIO, emit
+from flask_socketio import SocketIO, emit
 
 main = Blueprint('main', __name__)
 
