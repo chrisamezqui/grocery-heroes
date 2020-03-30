@@ -87,24 +87,24 @@ def helper():
 
 
 ##REST API FOR ADMIN (TESTING PURPOSES)##
-@main.route('/admin/<string:phone>', methods=['GET', 'DELETE'])
-def mod_db(phone):
-    user = User.query.filter_by(phone=phone).first()
-    if user is None:
-        return 'No such number in database'
-    if request.method == 'DELETE':
-        db.session.delete(user)
-        db.session.commit()
-    json = jsonify(
-            id=user.id,
-            phone=user.phone,
-            longitude=user.longitude,
-            latitude=user.latitude
-            )
-    return json
-
-@main.route('/admin/reset', methods=['GET']) #change to delete later
-def reset_db():
-    num_rows_deleted = db.session.query(User).delete()
-    db.session.commit()
-    return 'number of rows deleted: {}'.format(num_rows_deleted)
+# @main.route('/admin/<string:phone>', methods=['GET', 'DELETE'])
+# def mod_db(phone):
+#     user = User.query.filter_by(phone=phone).first()
+#     if user is None:
+#         return 'No such number in database'
+#     if request.method == 'DELETE':
+#         db.session.delete(user)
+#         db.session.commit()
+#     json = jsonify(
+#             id=user.id,
+#             phone=user.phone,
+#             longitude=user.longitude,
+#             latitude=user.latitude
+#             )
+#     return json
+#
+# @main.route('/admin/reset', methods=['GET']) #change to delete later
+# def reset_db():
+#     num_rows_deleted = db.session.query(User).delete()
+#     db.session.commit()
+#     return 'number of rows deleted: {}'.format(num_rows_deleted)
