@@ -63,5 +63,5 @@ function registrationOnClick(event) {
 function main(options) {
   config=options;
   xmlhttp = getHttpConnection();
-  document.getElementById( "registrationForm" ).addEventListener( "submit", registrationOnClick(event));
+  document.getElementById( "registrationForm" ).addEventListener( "submit", registrationOnClick);
 }
