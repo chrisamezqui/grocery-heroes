@@ -217,7 +217,7 @@
         //Add event listeners to the buttons that can be in the infowindow
         var userphone;
         infoWindow.addListener('domready', function() {
-          let doneButton = document.getElementById("doneButton");
+          let doneButton = document.getElementsByClassName("doneButton");
           if (doneButton !== null) {
             doneButton.addEventListener('click', function() {
               //replace with undo window
@@ -311,7 +311,7 @@
                    '<p><b>Phone Number(s):</b><br><ul>';
         for (let i = 0; i < phones.length; i++) {
           let phone = phones[i];
-          contentString += '<li>'+ phone + '<button style="margin-left:34px" name="'+phone+'"id="doneButton">Clear Request</button></li>';
+          contentString += '<li>'+ phone + '<button style="margin-left:34px" name="'+phone+'"class="doneButton">Clear Request</button></li>';
         }
 
         contentString += ' </ul><br>If a request has been '+
