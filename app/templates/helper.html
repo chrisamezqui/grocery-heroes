@@ -189,6 +189,12 @@
          xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
       }
 
+      function handleLocationError(browserHasGeolocation) {
+        alert(browserHasGeolocation ?
+                              'Error: The Geolocation service failed.' :
+                              'Error: Your browser doesn\'t support geolocation.');
+      }
+
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: -34.397, lng: 150.644},
@@ -301,12 +307,6 @@
         helpeePhoneMap.set(marker, phones);
         {% endfor %}
       };
-
-      function handleLocationError(browserHasGeolocation) {
-        alert(browserHasGeolocation ?
-                              'Error: The Geolocation service failed.' :
-                              'Error: Your browser doesn\'t support geolocation.');
-      }
 
       function getInfoWindowDefaultContent(phones) {
         let contentString = '<div style="color:black" id="helperNotification">'+
