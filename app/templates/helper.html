@@ -217,20 +217,23 @@
         //Add event listeners to the buttons that can be in the infowindow
         var userphone;
         infoWindow.addListener('domready', function() {
-          let doneButton = document.getElementsByClassName("doneButton");
-          if (doneButton !== null) {
-            doneButton.addEventListener('click', function() {
-              //replace with undo window
-              userphone = doneButton.name;
-              let contentString = '<div style="color:black" id="helperNotification">'+
-                                  '<h2>Thank you for your help!</h2>'+
-                                  '<p>Cick "Undo" if this was a mistake or click "Continue" '+
-                                  ' to confirm. </p><button id="undoButton">Undo</button>' +
-                                  '  <button id="confirmButton">Confirm</button></div>';
+          var doneButtons = document.getElementsByClassName("doneButton");
+          for (var i = 0; i < doneButtons.length; i++) {
+            let doneButton = doneButtons[i];
+            if (doneButton !== null) {
+              doneButton.addEventListener('click', function() {
+                //replace with undo window
+                userphone = doneButton.name;
+                let contentString = '<div style="color:black" id="helperNotification">'+
+                                    '<h2>Thank you for your help!</h2>'+
+                                    '<p>Cick "Undo" if this was a mistake or click "Continue" '+
+                                    ' to confirm. </p><button id="undoButton">Undo</button>' +
+                                    '  <button id="confirmButton">Confirm</button></div>';
 
-              infoWindow.setContent(contentString);
+                infoWindow.setContent(contentString);
 
-            });
+              });
+            }
           }
 
           let confirmButton = document.getElementById("confirmButton");
