@@ -234,7 +234,7 @@
               var longitude = position.coords.longitude;
               function sendRegistrationData() {
                 const formdata = new FormData( form );
-                console.log(formdata.get('phone');
+                console.log(formdata.get('phone'));
 
                 let numbers = formdata.get('phone').match(/(\d+)/);
                 let formattedNumber = '(' + numbers.slice(0,3) + ') ' + numbers.slice(3, 6) + '-' + numbers.slice(6);
