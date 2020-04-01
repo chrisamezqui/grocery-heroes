@@ -217,76 +217,10 @@
         </div>
       </div>
     </div>
+    <script src="{{ url_for('static', filename='helpee.js') }}"></script>
     <script>
-      window.addEventListener( "load", function () {
-        var xmlhttp;
-        if (window.XMLHttpRequest) {
-           // code for modern browsers
-           xmlhttp = new XMLHttpRequest();
-         } else {
-           // code for old IE browsers
-           xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(function(position) {
-              var latitude = position.coords.latitude;
-              var longitude = position.coords.longitude;
-              function sendRegistrationData() {
-                const formdata = new FormData( form );
-                console.log(formdata.get('phone'));
-
-                let numbers = formdata.get('phone').match(/\d+/g).join('');
-                console.log(formdata.get('phone').match(/\d+/g));
-                console.log(numbers);
-                console.log(numbers.slice(0,3));
-                let formattedNumber = '(' + numbers.slice(0,3) + ') ' + numbers.slice(3, 6) + '-' + numbers.slice(6);
-                formdata.set("phone", formattedNumber);
-
-                formdata.append("longitude", longitude)
-                formdata.append("latitude", latitude)
-
-                xmlhttp.addEventListener( "load", function(event) {
-                } );
-
-                xmlhttp.addEventListener( "error", function( event ) {
-                  alert( 'Oops! Something went wrong. :o' );
-                } );
-
-                xmlhttp.open( "POST", "{{ url_for('main.helpee') }}" );
-                xmlhttp.send(formdata);
-
-                document.getElementById("registrationBody").innerHTML = '<h2> <div>Thank you for '+
-                'submitting your request.</div> </h2>' +
-                '<div class="narrative"> <p> View or clear your request from the '+
-                '<a href="{{ url_for('main.helper') }}">helper page</a>. </p> </div>';
-                document.getElementById("registrationHeader").innerHTML = '';
-              }
-              let form = document.getElementById( "registrationForm" );
-              form.addEventListener( "submit", function ( event ) {
-                event.preventDefault();
-                if (form.elements[0].value == 0) {
-                  alert("Please enter your phone number before clicking submit.");
-                } else {
-                  sendRegistrationData();
-                }
-              } );
-
-          }, function() {
-            handleLocationError(true);
-          });
-        } else {
-          // Browser doesn't support Geolocation
-          handleLocationError(false);
-        }
-
-        function handleLocationError(browserHasGeolocation) {
-          alert(browserHasGeolocation ?
-                                'Error: The Geolocation service failed. Grocery Heroes needs your location to continue.' :
-                                'Error: Your browser doesn\'t support geolocation. Grocery Heroes needs your location to continue.');
-
-        }
-      });
+      var options = {helpeePageURL : "{{ url_for('main.helpee') }}" };
+      main(options);
     </script>
   </body>
 </html>
