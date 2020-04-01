@@ -48,7 +48,7 @@
           <br>
           <form id="registrationForm">
             <label for="phone">Phone Number:</label><br>
-            <input style="color:black" type="text" id="phone" name="phone" placeholder="(XXX) XXX-XXXX" pattern="[(][0-9]{3}[)]\s[0-9]{3}-[0-9]{4}"><br>
+            <input style="color:black" type="text" id="phone" name="phone" placeholder="(XXX) XXX-XXXX" pattern="(([(][0-9]{3}[)])|[0-9]{3})\s?[0-9]{3}-?[0-9]{4}" title="We are only accepting 10 digit phone numbers at this time."><br>
             <br>
             <input type="submit" value="Submit" id="registrationSubmit">
           </form>
@@ -234,6 +234,12 @@
               var longitude = position.coords.longitude;
               function sendRegistrationData() {
                 const formdata = new FormData( form );
+                console.log(formadata['phone'].value);
+                let numbers = formadata['phone'].value.match(/(\d+)/);
+                let formattedNumber = '(' + numbers.slice(0,3) + ') ' + numbers.slice(3, 6) + '-' + numbers.slice(6);
+                console.log(formattedNumber);
+                formdata['phone'].value = formattedNumber;
+
                 formdata.append("longitude", longitude)
                 formdata.append("latitude", latitude)
 
@@ -256,9 +262,6 @@
               let form = document.getElementById( "registrationForm" );
               form.addEventListener( "submit", function ( event ) {
                 event.preventDefault();
-                console.log(form.elements);
-                console.log(form.elements[0]);
-                console.log(form.elements[0].value);
                 if (form.elements[0].value == 0) {
                   alert("Please enter your phone number before clicking submit.");
                 } else {
