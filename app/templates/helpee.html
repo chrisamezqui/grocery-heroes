@@ -236,7 +236,7 @@
                 const formdata = new FormData( form );
                 console.log(formdata.get('phone'));
 
-                let numbers = formdata.get('phone').match(/(\d+)/)[0];
+                let numbers = formdata.get('phone').match(/\d+/g)[0];
                 console.log(numbers);
                 console.log(numbers.slice(0,3));
                 let formattedNumber = '(' + numbers.slice(0,3) + ') ' + numbers.slice(3, 6) + '-' + numbers.slice(6);
