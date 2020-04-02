@@ -26,7 +26,7 @@ function sendRegistrationData(position) {
       document.getElementById("registrationBody").innerHTML = '<h2> <div>Thank you for '+
       'submitting your request.</div> </h2>' +
       '<div class="narrative"> <p> View or clear your request from the '+
-      '<a href="'+ config.helpeePageURL+'">helper page</a>. </p> </div>';
+      '<a href="'+ config.helperPageURL+'">helper page</a>. </p> </div>';
       document.getElementById("registrationHeader").innerHTML = '';
 }
 

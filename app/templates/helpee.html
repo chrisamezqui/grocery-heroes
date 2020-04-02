@@ -219,7 +219,7 @@
     </div>
     <script src="{{ url_for('static', filename='scripts/helpee.js') }}"></script>
     <script>
-      var options = {helpeePageURL : "{{ url_for('main.helpee') }}" };
+      var options = {helpeePageURL : "{{ url_for('main.helpee') }}", helperPageURL : "{{ url_for('main.helper') }}" };
       main(options);
     </script>
   </body>
