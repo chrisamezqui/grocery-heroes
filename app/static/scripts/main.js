@@ -164,7 +164,7 @@ function addRequestMarkers(requests) {
     });
 
     marker.setMap(map);
-    mapState.phoneMap(marker, request.phones);
+    mapState.phoneMap.set(marker, request.phones);
   }
 }
 
