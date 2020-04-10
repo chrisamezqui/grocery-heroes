@@ -111,7 +111,7 @@ function removeRequest() {
   formdata.append("longitude", userlng);
   formdata.append("latitude", userlat);
   formdata.append("phone", userphone);
-  xmlhttp.open("DELETE", config.helperPageURL, true);
+  xmlhttp.open("DELETE", config.helperPageUrl, true);
   xmlhttp.send(formdata);
 }
 
