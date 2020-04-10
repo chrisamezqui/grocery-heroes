@@ -180,8 +180,12 @@
     </div>
     <script src="{{ url_for('static', filename='scripts/helper.js') }}"></script>
     <script>
-      var config = {};
-      main(config);
+    //todo: turn all this into a template block
+      var config = {
+        getRequestsUrl : "{{ url_for(main.requests) }}",
+        helperPageUrl : "{{ url_for(main.helper) }}"
+      };
+      initHelperPage(config);
     </script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key={{ gmapi_key }}&callback=initMap">

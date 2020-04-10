@@ -219,8 +219,11 @@
     </div>
     <script src="{{ url_for('static', filename='scripts/helpee.js') }}"></script>
     <script>
-      var options = {helpeePageURL : "{{ url_for('main.helpee') }}", helperPageURL : "{{ url_for('main.helper') }}" };
-      main(options);
+      var config = {
+        helpeePageURL : "{{ url_for('main.helpee') }}",
+        helperPageURL : "{{ url_for('main.helper') }}"
+      };
+      initHelpeePage(config);
     </script>
   </body>
 </html>
