@@ -92,7 +92,7 @@ function initConfirmationWindow(event) {
 }
 
 function removeRequest() {
-  let userphones = mapState.phoneMap.get(activeMarker);
+  let userphones = mapState.phoneMap.get(mapState.activeMarker);
   let userphone = infoWindowState.userphone;
   let activeMarker = mapState.activeMarker;
 
