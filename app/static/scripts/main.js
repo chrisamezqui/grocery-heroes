@@ -128,7 +128,7 @@ function initInfoWindow() {
     let undoButton = document.getElementById("undoButton");
     if (confirmButton !== null && undoButton !== null) {
       //logic from request removal confirmation
-      confirmButton.addEventListener("click", removeRequest});
+      confirmButton.addEventListener("click", removeRequest);
 
       //logic to undo request removal
       undoButton.addEventListener("click", function() {
