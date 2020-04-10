@@ -132,7 +132,7 @@ function initInfoWindow() {
 
       //logic to undo request removal
       undoButton.addEventListener("click", function() {
-        infoWindow.setContent(getInfoWindowDefaultContent(mapState.phoneMap.get(activeMarker)));
+        infoWindow.setContent(getInfoWindowDefaultContent(mapState.phoneMap.get(mapState.activeMarker)));
       });
     }
 }
