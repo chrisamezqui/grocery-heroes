@@ -153,10 +153,6 @@ function addRequestMarkers(requests) {
     marker.setMap(map);
     mapState.phoneMap.set(marker, request.phone);
   }
-
-  for (let val of mapState.phoneMap.values()) {
-    console.log(val)
-  }
 }
 
 function initMap() {

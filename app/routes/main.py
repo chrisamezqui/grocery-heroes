@@ -36,6 +36,7 @@ def helpee():
             latitude=latitude
         )
 
+        print(new_helpee)
         db.session.add(new_helpee)
         db.session.commit()
 
@@ -71,4 +72,5 @@ def requests():
         .all()
 
     formatted_requests = [{'longitude' : request.longitude, 'latitude' : request.latitude, 'phone': request.phone} for request in local_requests]
+    print(formatted_requests)
     return jsonify(localRequests=formatted_requests), 200
