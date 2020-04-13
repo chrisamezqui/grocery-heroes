@@ -151,6 +151,10 @@ function addRequestMarkers(requests) {
     marker.setMap(map);
     mapState.phoneMap.set(marker, request.phone);
   }
+
+  for (let key of mapState.phoneMap.key()) {
+    console.log(key)
+  }
 }
 
 function initMap() {
