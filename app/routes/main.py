@@ -70,5 +70,5 @@ def requests():
         .filter(User.latitude != None)\
         .all()
 
-    local_requests = [{'longitude' : loc[0], 'latitude' : loc[1], 'phone': phone} for loc, phones in locationMap.items()]
-    return jsonify(localRequests=local_requests), 200
+    formatted_requests = [{'longitude' : request.longitude, 'latitude' : request.latitude, 'phone': request.phone} for request in local_requests]
+    return jsonify(localRequests=formatted_requests), 200
