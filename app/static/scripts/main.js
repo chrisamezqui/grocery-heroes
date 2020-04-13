@@ -152,7 +152,7 @@ function addRequestMarkers(requests) {
     mapState.phoneMap.set(marker, request.phone);
   }
 
-  for (let key of mapState.phoneMap.key()) {
+  for (let key of mapState.phoneMap.keys()) {
     console.log(key)
   }
 }
