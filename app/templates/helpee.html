@@ -220,8 +220,8 @@
     <script src="{{ url_for('static', filename='scripts/helpee.js') }}"></script>
     <script>
       var config = {
-        helpeePageURL : "{{ url_for('main.helpee') }}",
-        helperPageURL : "{{ url_for('main.helper') }}"
+        helpeeEndpoint : "{{ url_for('main.helpee') }}",
+        helperEndpoint : "{{ url_for('main.helper') }}"
       };
       initHelpeePage(config);
     </script>

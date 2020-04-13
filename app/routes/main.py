@@ -36,7 +36,7 @@ def helpee():
             latitude=latitude
         )
 
-        print(new_helpee)
+        print('\n', new_helpee, '\n')
         db.session.add(new_helpee)
         db.session.commit()
 
@@ -52,7 +52,7 @@ def helper():
         phone = request.form['phone']
 
         user = User.query.filter(and_(User.longitude==longitude, User.latitude==latitude, User.phone==phone)).first()
-        print(request.form, user)
+        print('\n',request.form, user,'\n')
         if user is not None:
             db.session.delete(user)
             db.session.commit()
@@ -72,5 +72,5 @@ def requests():
         .all()
 
     formatted_requests = [{'longitude' : request.longitude, 'latitude' : request.latitude, 'phone': request.phone} for request in local_requests]
-    print(formatted_requests)
+    print('\n', formatted_requests, '\n')
     return jsonify(localRequests=formatted_requests), 200

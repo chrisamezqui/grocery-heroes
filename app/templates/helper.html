@@ -182,8 +182,8 @@
     <script>
     //todo: turn all this into a template block
       var config = {
-        getRequestsUrl : "{{ url_for('main.requests') }}",
-        helperPageUrl : "{{ url_for('main.helper') }}"
+        requestsEndpoint : "{{ url_for('main.requests') }}",
+        helperEndpoint : "{{ url_for('main.helper') }}"
       };
       initHelperPage(config);
     </script>

@@ -22,13 +22,14 @@ function sendRegistrationData(position) {
   formdata.append("longitude", longitude);
   formdata.append("latitude", latitude);
   let xmlhttp = getHttpConnection();
-  xmlhttp.open( "POST", config.helpeePageURL);
+  xmlhttp.open( "POST", config.helpeeEndpoint);
+  console.log(config.helpeeEndpoint);
   xmlhttp.send(formdata);
 
   document.getElementById("registrationBody").innerHTML = '<h2> <div>Thank you for '+
   'submitting your request.</div> </h2>' +
   '<div class="narrative"> <p> View or clear your request from the '+
-  '<a href="'+ config.helperPageURL+'">helper page</a>. </p> </div>';
+  '<a href="'+ config.helperEndpoint+'">helper page</a>. </p> </div>';
   document.getElementById("registrationHeader").innerHTML = '';
 }
 
@@ -181,7 +182,7 @@ function initMap() {
         addRequestMarkers(localRequests);
       }
     };
-    xmlhttp.open("GET", config.getRequestsUrl, true);
+    xmlhttp.open("GET", config.requestsEndpoint, true);
     xmlhttp.send();
 
     initInfoWindow();
