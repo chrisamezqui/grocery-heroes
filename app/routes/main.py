@@ -70,13 +70,5 @@ def requests():
         .filter(User.latitude != None)\
         .all()
 
-    locationMap = {}
-    for request in local_requests:
-        key = (request.longitude, request.latitude)
-        if key in locationMap:
-            locationMap[key].append(request.phone)
-        else:
-            locationMap[key] = [request.phone]
-
-    local_requests = [{'longitude' : loc[0], 'latitude' : loc[1], 'phones': phones} for loc, phones in locationMap.items()]
+    local_requests = [{'longitude' : loc[0], 'latitude' : loc[1], 'phone': phone} for loc, phones in locationMap.items()]
     return jsonify(localRequests=local_requests), 200
