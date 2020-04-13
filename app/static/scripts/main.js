@@ -1,4 +1,4 @@
-var xmlhttp, config; // universal
+var config; // universal
 var mapState, map, infoWindow; //for helper page
 
 function getHttpConnection() {
@@ -21,6 +21,7 @@ function sendRegistrationData(position) {
   formdata.set("phone", formatNumber(formdata.get('phone')));
   formdata.append("longitude", longitude);
   formdata.append("latitude", latitude);
+  let xmlhttp = getHttpConnection();
   xmlhttp.open( "POST", config.helpeePageURL);
   xmlhttp.send(formdata);
 
@@ -99,6 +100,7 @@ function removeRequest() {
   formdata.append("longitude", userlng);
   formdata.append("latitude", userlat);
   formdata.append("phone", userphone);
+  let xmlhttp = getHttpConnection();
   xmlhttp.open("DELETE", config.helperPageUrl, true);
   xmlhttp.send(formdata);
 }
@@ -176,6 +178,7 @@ function initMap() {
     infoWindow.addListener('domready', initInfoWindow);
 
     //Request local request json object form db and update mjap
+    let xmlhttp = getHttpConnection();
     xmlhttp.onreadystatechange = function() {
       if (this.readyState == 4) {
         let localRequests = JSON.parse(xmlhttp.responseText).localRequests;
@@ -190,11 +193,9 @@ function initMap() {
 
 function initHelpeePage(options) {
   config=options;
-  xmlhttp = getHttpConnection();
   document.getElementById( "registrationForm" ).addEventListener( "submit", registrationOnClick);
 }
 
 function initHelperPage(options) {
   config=options;
-  xmlhttp = getHttpConnection();
 }
