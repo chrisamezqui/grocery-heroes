@@ -5,8 +5,6 @@ from app.settings import *
 from sqlalchemy import and_
 import math
 from random import uniform
-# from flask_socketio import emit
-# from app import socketio
 
 main = Blueprint('main', __name__)
 
@@ -41,7 +39,6 @@ def helpee():
         db.session.add(new_helpee)
         db.session.commit()
 
-        # emit('add helpee', {data: 'test'}, broadcast=True)
         return jsonify(success=True), 200
 
     return render_template('helpee.html'), 200
@@ -59,7 +56,6 @@ def helper():
             db.session.delete(user)
             db.session.commit()
 
-        # emit('remove helpee', {data: 'test'}, broadcast=True)
         return jsonify(success=True), 200
 
     context = {

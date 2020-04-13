@@ -1,5 +1,5 @@
 var xmlhttp, config; // universal
-var mapState, map, infoWindow, infoWindowState; //for helper page
+var mapState, map, infoWindow; //for helper page
 
 function getHttpConnection() {
   if (window.XMLHttpRequest) {
@@ -57,19 +57,13 @@ function registrationOnClick(event) {
   }
 }
 
-function getInfoWindowDefaultContent(phones) {
-  let contentString = '<div style="color:black" id="helperNotification">'+
+function getInfoWindowDefaultContent(phone) {
+  return '<div style="color:black" id="helperNotification">'+
              '<h2>Interested in helping out?</h2>'+
-             '<p><b>Phone Number(s):</b><br><ul>';
-  for (let i = 0; i < phones.length; i++) {
-    let phone = phones[i];
-    contentString += '<li>'+ phone + '<button style="margin-left:34px" name="'+phone+'"class="doneButton">Clear Request</button></li>';
-  }
-
-  contentString += ' </ul><br>If a request has been '+
-              'completed: Click "Clear Request" next to the phone number you called.</p>'+
-             '</div>';
-  return contentString;
+             '<p><b>Phone Number:</b><br>' + phone +
+             '<br>If a request has been '+
+             'completed: Click "Clear Request".</p>'+
+             '<button style="margin-left:34px" id="doneButton">Clear Request</button> </div>';
 }
 
 function centerMap(position) {
@@ -82,7 +76,6 @@ function centerMap(position) {
 
 //replace with confirmation window
 function initConfirmationWindow(event) {
-  infoWindowState.userPhone = event.target.name;
   let contentString = '<div style="color:black" id="helperNotification">'+
                       '<h2>Thank you for your help!</h2>'+
                       '<p>Cick "Undo" if this was a mistake or click "Continue" '+
@@ -92,17 +85,12 @@ function initConfirmationWindow(event) {
 }
 
 function removeRequest() {
-  let userphones = mapState.phoneMap.get(mapState.activeMarker);
-  let userphone = infoWindowState.userphone;
   let activeMarker = mapState.activeMarker;
+  let userphone = mapState.phoneMap.get(activeMarker);
 
   //update frontend data
-  userphones.splice(userphones.indexOf(userphone), 1);
-  if (userphones.length == 0) {
-    activeMarker.setMap(null);
-  } else {
-    infoWindow.setContent(getInfoWindowDefaultContent(mapState.phoneMap.get(activeMarker)));
-  }
+  mapState.phoneMap.delete(activeMarker);
+  activeMarker.setMap(null);
 
   //Delete record form database
   let userlng = activeMarker.getPosition().lng();
@@ -116,12 +104,9 @@ function removeRequest() {
 }
 
 function initInfoWindow() {
-    let doneButtons = document.getElementsByClassName("doneButton");
-    for (let i = 0; i < doneButtons.length; i++) {
-      let doneButton = doneButtons[i];
-      if (doneButton !== null) {
-        doneButton.addEventListener('click', initConfirmationWindow);
-      }
+    let doneButton = document.getElementById("doneButton");
+    if (doneButton !== null) {
+      doneButton.addEventListener('click', initConfirmationWindow);
     }
 
     let confirmButton = document.getElementById("confirmButton");
@@ -164,7 +149,7 @@ function addRequestMarkers(requests) {
     });
 
     marker.setMap(map);
-    mapState.phoneMap.set(marker, request.phones);
+    mapState.phoneMap.set(marker, request.phone);
   }
 }
 
@@ -179,9 +164,6 @@ function initMap() {
     };
 
     infoWindow = new google.maps.InfoWindow;
-    infoWindowState = {
-      userPhone : ""
-    }
 
     mapState.phoneMap = new Map();
     useGeolocationPosition(centerMap, showError, {enableHighAccuracy : true});
