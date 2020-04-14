@@ -89,10 +89,9 @@ function initConfirmationWindow(event) {
 
 function removeRequest() {
   let activeMarker = mapState.activeMarker;
-  let userphone = mapState.phoneMap.get(activeMarker);
+  let userphone = activeMarker.phone;
 
   //update frontend data
-  mapState.phoneMap.delete(activeMarker);
   activeMarker.setMap(null);
   activeMarker.circle.setMap(null);
 
@@ -122,7 +121,7 @@ function initInfoWindow() {
 
       //logic to undo request removal
       undoButton.addEventListener("click", function() {
-        infoWindow.setContent(getInfoWindowDefaultContent(mapState.phoneMap.get(mapState.activeMarker)));
+        infoWindow.setContent(getInfoWindowDefaultContent(mapState.activeMarker.phone));
       });
     }
 }
@@ -163,13 +162,10 @@ function addRequestMarkers(requests) {
       document.getElementById("map").scrollIntoView({behavior : 'smooth'});
       map.panTo(this.getPosition());
       mapState.activeMarker = this;
-      let contentString = getInfoWindowDefaultContent(mapState.phoneMap.get(this));
+      let contentString = getInfoWindowDefaultContent(this.phone);
       infoWindow.setContent(contentString);
       infoWindow.open(map, this);
     });
-
-    // marker.setMap(map);
-    mapState.phoneMap.set(marker, request.phone);
   }
 }
 
@@ -179,13 +175,11 @@ function initMap() {
       zoom: 13
     });
     mapState = {
-      activeMarker : null,
-      phoneMap : null
+      activeMarker : null
     };
 
     infoWindow = new google.maps.InfoWindow;
 
-    mapState.phoneMap = new Map();
     useGeolocationPosition(centerMap, showError, {enableHighAccuracy : true});
 
     //Add event listeners to the buttons that can be in the infowindow
