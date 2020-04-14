@@ -213,13 +213,17 @@
         requestsEndpoint : "{{ url_for('main.requests') }}",
         helperEndpoint : "{{ url_for('main.helper') }}",
         scrambleRadiusMeters : {{ scramble_radius_meters }},
-        iconURL : "{{ url_for('static', filename='imgs/145270-dinosaurs/png/allosaurus.png')}}"
+        iconURL : "{{ url_for('static', filename='imgs/allosaurus.png')}}"
       };
       initHelperPage(config);
     </script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key={{ gmapi_key }}&callback=initMap">
     </script>
+
+    <!-- map icons -->
+    <img style="display:none" src="{{ url_for('static', filename='imgs/allosaurus.png') }}">
+
 
 </body>
 </html>
