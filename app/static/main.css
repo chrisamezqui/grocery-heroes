@@ -7417,11 +7417,13 @@ span.rev {
 
 /* Modal Content */
 .modal-content {
+  font-family: "Avenir LT Std Book",sans-serif;
+  color: black;
   background-color: #fefefe;
   margin: auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%;
+  width: 65%;
 }
 
 /* The Close Button */
