@@ -103,7 +103,7 @@ function removeRequest() {
   formdata.append("latitude", userlat);
   formdata.append("phone", userphone);
   let xmlhttp = getHttpConnection();
-  xmlhttp.open("DELETE", config.helperPageUrl, true);
+  xmlhttp.open("DELETE", config.helperEndpoint, true);
   xmlhttp.send(formdata);
 }
 
