@@ -236,6 +236,6 @@ function initHelpeePage(options) {
 
 function initHelperPage(options) {
   config=options;
-  document.getElementById("tncMapForm").addEventListener( "submit ", showMap);
+  document.getElementById("tncMapForm").addEventListener( "submit", showMap);
   initModal();
 }
