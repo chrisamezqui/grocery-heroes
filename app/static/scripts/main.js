@@ -217,6 +217,16 @@ function initModal() {
   }
 }
 
+function showMap(event) {
+  event.preventDefault();
+  if(!this.elements[0].checked) {
+    alert("Please indicate that you have read and agree to the Terms and Conditions.")
+  } else {
+    document.getElementById("tncMapForm").style.display = "none";
+    document.getElementById("map").style.height = "100%";
+  }
+}
+
 function initHelpeePage(options) {
   config=options;
   document.getElementById( "registrationForm" ).addEventListener( "submit", registrationOnClick);
@@ -225,4 +235,5 @@ function initHelpeePage(options) {
 
 function initHelperPage(options) {
   config=options;
+  document.getElementById("showMap").addEventListener( "click", showMap);
 }
