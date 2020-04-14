@@ -1,16 +1,16 @@
 from flask import Blueprint, render_template, request, redirect, url_for, jsonify
 from app.extensions import db
 from app.models import User
-from app.keys import *
+from app.settings import *
 from sqlalchemy import and_
-# from flask_socketio import emit
-# from app import socketio
+import math
+from random import uniform
 
 main = Blueprint('main', __name__)
 
 @main.route('/', methods=['GET', 'POST'])
 def index():
-    return render_template('home.html')
+    return render_template('home.html'), 200
 
 @main.route('/helpee', methods=['GET', 'POST'])
 def helpee():
@@ -18,6 +18,12 @@ def helpee():
         phone = request.form['phone']
         longitude = float(request.form['longitude'])
         latitude = float(request.form['latitude'])
+
+        #scramble coordinates
+        theta = uniform(-math.pi, math.pi)
+        length = uniform(0, SCRAMBLE_RADIUS)
+        longitude += math.sin(theta) * length
+        latitude += math.cos(theta) * length
 
         #avoid exact duplicates in the database
         user = User.query.filter(and_(User.longitude==longitude, User.latitude==latitude, User.phone==phone)).first()
@@ -30,13 +36,13 @@ def helpee():
             latitude=latitude
         )
 
+        print('\n', new_helpee, '\n')
         db.session.add(new_helpee)
         db.session.commit()
 
-        # emit('add helpee', {data: 'test'}, broadcast=True)
-        return jsonify(success=True)
+        return jsonify(success=True), 200
 
-    return render_template('helpee.html')
+    return render_template('helpee.html'), 200
 
 @main.route('/helper', methods=['GET', 'DELETE'])
 def helper():
@@ -46,65 +52,26 @@ def helper():
         phone = request.form['phone']
 
         user = User.query.filter(and_(User.longitude==longitude, User.latitude==latitude, User.phone==phone)).first()
-        print(request.form, user)
+        print('\n',request.form, user,'\n')
         if user is not None:
             db.session.delete(user)
             db.session.commit()
 
-        # emit('remove helpee', {data: 'test'}, broadcast=True)
         return jsonify(success=True), 200
 
-    local_helpees = User.query\
+    context = {
+        'gmapi_key' : GOOGLE_MAPS_API_KEY,
+        'scramble_radius_meters' : SCRAMBLE_RADIUS_METERS
+    }
+    return render_template('helper.html', **context)
+
+@main.route('/requests', methods=['GET'])
+def requests():
+    local_requests = User.query\
         .filter(User.longitude != None)\
         .filter(User.latitude != None)\
         .all()
 
-    locationMap = {}
-    for helpee in local_helpees:
-        key = (helpee.longitude, helpee.latitude)
-        if key in locationMap:
-            locationMap[key].append(helpee.phone)
-        else:
-            locationMap[key] = [helpee.phone]
-
-    local_helpees_grouped = [({'longitude' : loc[0], 'latitude' : loc[1], 'phones': phone}) for loc, phone in locationMap.items()]
-
-    context = {
-        'local_helpees' : local_helpees_grouped,
-        'gmapi_key' : GOOGLE_MAPS_API_KEY
-    }
-    return render_template('helper.html', **context)
-
-# @main.route('/helper/map/marker')
-# def verify_marker():
-#     phone = request.form['phone']
-#     longitude = float(request.form['longitude'])
-#     latitude = float(request.form['latitude'])
-#     user = User.query.filter(and_(User.longitude==longitude, User.latitude==latitude, User.phone==phone)).first()
-#     user_exists = user is not None
-#
-#     return jsonify(user_exists=user_exists)
-
-
-##REST API FOR ADMIN (TESTING PURPOSES)##
-# @main.route('/admin/<string:phone>', methods=['GET', 'DELETE'])
-# def mod_db(phone):
-#     user = User.query.filter_by(phone=phone).first()
-#     if user is None:
-#         return 'No such number in database'
-#     if request.method == 'DELETE':
-#         db.session.delete(user)
-#         db.session.commit()
-#     json = jsonify(
-#             id=user.id,
-#             phone=user.phone,
-#             longitude=user.longitude,
-#             latitude=user.latitude
-#             )
-#     return json
-#
-# @main.route('/admin/reset', methods=['GET']) #change to delete later
-# def reset_db():
-#     num_rows_deleted = db.session.query(User).delete()
-#     db.session.commit()
-#     return 'number of rows deleted: {}'.format(num_rows_deleted)
+    formatted_requests = [{'longitude' : request.longitude, 'latitude' : request.latitude, 'phone': request.phone} for request in local_requests]
+    print('\n', formatted_requests, '\n')
+    return jsonify(localRequests=formatted_requests), 200

@@ -1,6 +1,5 @@
-var xmlhttp, config;
-// var map, infoWindow, xmlhttp, activeMarker, helpeePhoneMap;
-
+var config; // universal
+var mapState, map, infoWindow; //for helper page
 
 function getHttpConnection() {
   if (window.XMLHttpRequest) {
@@ -15,21 +14,22 @@ function formatNumber(formString) {
 }
 
 function sendRegistrationData(position) {
-      let latitude = position.coords.latitude;
-      let longitude = position.coords.longitude;
-      let form = document.getElementById("registrationForm");
-      let formdata = new FormData(form);
-      formdata.set("phone", formatNumber(formdata.get('phone')));
-      formdata.append("longitude", longitude);
-      formdata.append("latitude", latitude);
-      xmlhttp.open( "POST", config.helpeePageURL);
-      xmlhttp.send(formdata);
+  let latitude = position.coords.latitude;
+  let longitude = position.coords.longitude;
+  let form = document.getElementById("registrationForm");
+  let formdata = new FormData(form);
+  formdata.set("phone", formatNumber(formdata.get('phone')));
+  formdata.append("longitude", longitude);
+  formdata.append("latitude", latitude);
+  let xmlhttp = getHttpConnection();
+  xmlhttp.open( "POST", config.helpeeEndpoint);
+  xmlhttp.send(formdata);
 
-      document.getElementById("registrationBody").innerHTML = '<h2> <div>Thank you for '+
-      'submitting your request.</div> </h2>' +
-      '<div class="narrative"> <p> View or clear your request from the '+
-      '<a href="'+ config.helperPageURL+'">helper page</a>. </p> </div>';
-      document.getElementById("registrationHeader").innerHTML = '';
+  document.getElementById("registrationBody").innerHTML = '<h2> <div>Thank you for '+
+  'submitting your request.</div> </h2>' +
+  '<div class="narrative"> <p> View or clear your request from the '+
+  '<a href="'+ config.helperEndpoint+'#map">helper page</a>. </p> </div>';
+  document.getElementById("registrationHeader").innerHTML = '';
 }
 
 function showError(error) {
@@ -51,31 +51,22 @@ function showError(error) {
 
 function registrationOnClick(event) {
   event.preventDefault();
-  if (this.elements[0].value === 0) {
+  if (this.elements[0].value.length === 0) {
     alert("Please enter your phone number before clicking submit.");
+  } else if(!this.elements[2].checked) {
+    alert("Please indicate that you have read and agree to the Terms and Conditions.")
   } else {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(sendRegistrationData, showError, {enableHighAccuracy : true});
-    } else {
-      alert('Your browser does not support Geolocation services: Unfortunately Grocery Heroes requires this.');
-    }
+    useGeolocationPosition(sendRegistrationData, showError, {enableHighAccuracy : true});
   }
 }
 
-function getInfoWindowDefaultContent(phones) {
-  let contentString = '<div style="color:black" id="helperNotification">'+
+function getInfoWindowDefaultContent(phone) {
+  return '<div style="color:black" id="helperNotification">'+
              '<h2>Interested in helping out?</h2>'+
-             '<p><b>Phone Number(s):</b><br><ul>';
-  for (let i = 0; i < phones.length; i++) {
-    let phone = phones[i];
-    contentString += '<li>'+ phone + '<button style="margin-left:34px" name="'+phone+'"class="doneButton">Clear Request</button></li>';
-  }
-
-  contentString += ' </ul><br>If a request has been '+
-              'completed: Click "Clear Request" next to the phone number you called.</p>'+
-             '</div>';
-  console.log(contentString);
-  return contentString;
+             '<p><b>Phone Number:</b>' + phone +
+             '<br>If a request has been '+
+             'completed: Click "Clear Request".</p>'+
+             '<div align="middle"><button id="doneButton">Clear Request</button></div></div>';
 }
 
 function centerMap(position) {
@@ -87,122 +78,175 @@ function centerMap(position) {
 }
 
 //replace with confirmation window
-function initConfirmationWindow() {
-  userphone = doneButton.name;
+function initConfirmationWindow(event) {
   let contentString = '<div style="color:black" id="helperNotification">'+
                       '<h2>Thank you for your help!</h2>'+
                       '<p>Cick "Undo" if this was a mistake or click "Continue" '+
-                      ' to confirm. </p><button id="undoButton">Undo</button>' +
-                      '  <button id="confirmButton">Confirm</button></div>';
+                      ' to confirm.</p><button style="padding-right:4px" id="undoButton">Undo</button>' +
+                      '<button id="confirmButton">Continue</button></div>';
   infoWindow.setContent(contentString);
 }
 
+function removeRequest() {
+  let activeMarker = mapState.activeMarker;
+  let userphone = activeMarker.phone;
+
+  //update frontend data
+  activeMarker.setMap(null);
+  activeMarker.circle.setMap(null);
+
+  //Delete record form database
+  let userlng = activeMarker.getPosition().lng();
+  let userlat = activeMarker.getPosition().lat();
+  let formdata = new FormData();
+  formdata.append("longitude", userlng);
+  formdata.append("latitude", userlat);
+  formdata.append("phone", userphone);
+  let xmlhttp = getHttpConnection();
+  xmlhttp.open("DELETE", config.helperEndpoint, true);
+  xmlhttp.send(formdata);
+}
+
 function initInfoWindow() {
-    let doneButtons = document.getElementsByClassName("doneButton");
-    for (let i = 0; i < doneButtons.length; i++) {
-      let doneButton = doneButtons[i];
-      if (doneButton !== null) {
-        doneButton.addEventListener('click', function() {
-
-
-        });
-      }
+    let doneButton = document.getElementById("doneButton");
+    if (doneButton !== null) {
+      doneButton.addEventListener('click', initConfirmationWindow);
     }
 
     let confirmButton = document.getElementById("confirmButton");
     let undoButton = document.getElementById("undoButton");
     if (confirmButton !== null && undoButton !== null) {
-
       //logic from request removal confirmation
-      confirmButton.addEventListener("click", function() {
-        //Update front-end data
-        console.log(userphone);
-        console.log(helpeePhoneMap);
-
-
-        let userphones = helpeePhoneMap.get(activeMarker);
-        userphones.splice(userphones.indexOf(userphone), 1);
-
-        if (userphones.length == 0) {
-          activeMarker.setMap(null);
-        } else {
-          infoWindow.setContent(getInfoWindowDefaultContent(helpeePhoneMap.get(activeMarker)));
-        }
-
-        //Delete record form database
-        let userlng = activeMarker.getPosition().lng();
-        let userlat = activeMarker.getPosition().lat();
-        let formdata = new FormData();
-        formdata.append("longitude", userlng);
-        formdata.append("latitude", userlat);
-        formdata.append("phone", userphone);
-        xmlhttp.open("DELETE", "{{ url_for('main.helper')}}", true);
-        xmlhttp.send(formdata);
-      });
+      confirmButton.addEventListener("click", removeRequest);
 
       //logic to undo request removal
       undoButton.addEventListener("click", function() {
-        infoWindow.setContent(getInfoWindowDefaultContent(helpeePhoneMap.get(activeMarker)));
+        infoWindow.setContent(getInfoWindowDefaultContent(mapState.activeMarker.phone));
       });
     }
+}
+
+function useGeolocationPosition(success, failure, config) {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(success, failure, config);
+  } else {
+    alert('Your browser does not support Geolocation services: Some features may not work.');
+  }
+}
+
+function addRequestMarkers(requests) {
+  for (let i = 0; i < requests.length; i++) {
+    let request = requests[i];
+    let center = {lat : request.latitude, lng : request.longitude};
+    let circle = new google.maps.Circle({
+            strokeColor: '#3366ff',
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: '#3366ff',
+            fillOpacity: 0.25,
+            map: map,
+            center: center,
+            radius: config.scrambleRadiusMeters
+          });
+
+    let marker = new google.maps.Marker({
+      position : center,
+      map : map,
+      title : 'Somebody could use some help here!',
+      phone: request.phone,
+      circle: circle
+      // icon: config.iconURL
+    });
+
+    marker.addListener('click', function() {
+      document.getElementById("map").scrollIntoView({behavior : 'smooth'});
+      map.panTo(this.getPosition());
+      mapState.activeMarker = this;
+      let contentString = getInfoWindowDefaultContent(this.phone);
+      infoWindow.setContent(contentString);
+      infoWindow.open(map, this);
+    });
+  }
 }
 
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
-      center: {lat: -34.397, lng: 150.644},
+      center: {lat: 37.8715, lng: 122.2730},
       zoom: 13
     });
-    infoWindow = new google.maps.InfoWindow;
-    helpeePhoneMap = new Map();
+    mapState = {
+      activeMarker : null
+    };
 
-    // Try HTML5 geolocation.
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(centerMap);
-    }
+    infoWindow = new google.maps.InfoWindow;
+
+    useGeolocationPosition(centerMap, showError, {enableHighAccuracy : true});
 
     //Add event listeners to the buttons that can be in the infowindow
-    var userphone;
-    infoWindow.addListener('domready', function() {
-    });
+    infoWindow.addListener('domready', initInfoWindow);
 
-    // Place pins on map.
-    var marker;
-    var phones;
-    {% for helpee in local_helpees %}
-    marker = new google.maps.Marker({
-      position: {lat: {{ helpee.latitude }}, lng:{{ helpee. longitude }}},
-      map: map,
-      title: 'Somebody could use some help here!'
-    });
+    //Request local request json object form db and update mjap
+    let xmlhttp = getHttpConnection();
+    xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4) {
+        let localRequests = JSON.parse(xmlhttp.responseText).localRequests;
+        addRequestMarkers(localRequests);
+      }
+    };
+    xmlhttp.open("GET", config.requestsEndpoint, true);
+    xmlhttp.send();
 
-    phones = [];
-    {% for phone in helpee.phones %}
-    phones.push('{{ phone }}');
-    {% endfor %}
-
-    marker.addListener('click', function() {
-      document.getElementById("map").scrollIntoView({behavior:'smooth'});
-      map.panTo(this.getPosition());
-      activeMarker = this;
-      let contentString = getInfoWindowDefaultContent(helpeePhoneMap.get(this));
-      infoWindow.setContent(contentString);
-      infoWindow.open(map, this);
-    });
-    marker.setMap(map);
-    helpeePhoneMap.set(marker, phones);
-    {% endfor %}
-  };
+    initInfoWindow();
 }
 
-function runHelpeePage(options) {
+function initModal() {
+  let modal = document.getElementById("modal");
+  let btn = document.getElementById("tnc");
+  let span = document.getElementsByClassName("close")[0];
+  let acceptButton = document.getElementById("tncAccept");
+
+  // When the user clicks the button, open the modal
+  btn.onclick = function() {
+    modal.style.display = "block";
+  }
+
+  // When the user clicks on <span> (x), close the modal
+  span.onclick = function() {
+    modal.style.display = "none";
+  }
+
+  acceptButton.onclick = function() {
+    modal.style.display = "none";
+  }
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+}
+
+function showMap(event) {
+  event.preventDefault();
+  if(!this.elements[0].checked) {
+    alert("Please indicate that you have read and agree to the Terms and Conditions.")
+  } else {
+    document.getElementById("tncMapForm").style.display = "none";
+    let mapElement = document.getElementById("map");
+    mapElement.style.height = "100%";
+    mapElement.scrollIntoView({behavior : 'smooth'});
+  }
+}
+
+function initHelpeePage(options) {
   config=options;
-  xmlhttp = getHttpConnection();
   document.getElementById( "registrationForm" ).addEventListener( "submit", registrationOnClick);
+  initModal();
 }
 
-function runHelperPage(options) {
+function initHelperPage(options) {
   config=options;
-  xmlhttp = getHttpConnection();
-
-
+  document.getElementById("tncMapForm").addEventListener( "submit", showMap);
+  initModal();
 }
