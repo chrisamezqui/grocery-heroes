@@ -83,7 +83,7 @@ function initConfirmationWindow(event) {
                       '<h2>Thank you for your help!</h2>'+
                       '<p>Cick "Undo" if this was a mistake or click "Continue" '+
                       ' to confirm.</p><button style="padding-right:4px" id="undoButton">Undo</button>' +
-                      '<button id="confirmButton">Confirm</button></div>';
+                      '<button id="confirmButton">Continue</button></div>';
   infoWindow.setContent(contentString);
 }
 
