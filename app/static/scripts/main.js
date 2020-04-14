@@ -235,5 +235,6 @@ function initHelpeePage(options) {
 
 function initHelperPage(options) {
   config=options;
+  initModal();
   document.getElementById("showMap").addEventListener( "click", showMap);
 }
