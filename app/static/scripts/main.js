@@ -215,6 +215,7 @@ function initModal() {
 function initHelpeePage(options) {
   config=options;
   document.getElementById( "registrationForm" ).addEventListener( "submit", registrationOnClick);
+  initModal();
 }
 
 function initHelperPage(options) {
