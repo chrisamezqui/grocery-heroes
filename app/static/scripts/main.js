@@ -152,13 +152,13 @@ function addRequestMarkers(requests) {
             radius: config.scrambleRadiusMeters
           });
 
-
     let marker = new google.maps.Marker({
       position : center,
       map : map,
       title : 'Somebody could use some help here!',
       phone: request.phone,
-      circle: circle
+      circle: circle,
+      icon: config.iconURL
     });
 
     marker.addListener('click', function() {

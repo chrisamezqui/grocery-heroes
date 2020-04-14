@@ -212,7 +212,8 @@
       var config = {
         requestsEndpoint : "{{ url_for('main.requests') }}",
         helperEndpoint : "{{ url_for('main.helper') }}",
-        scrambleRadiusMeters : {{ scramble_radius_meters }}
+        scrambleRadiusMeters : {{ scramble_radius_meters }},
+        iconURL : "{{ url_for('static', filename='imgs/145270-dinosaurs/png/allosaurus.png')}}"
       };
       initHelperPage(config);
     </script>
