@@ -219,6 +219,7 @@ function initModal() {
 
 function showMap(event) {
   event.preventDefault();
+  console.log("uwu");
   if(!this.elements[0].checked) {
     alert("Please indicate that you have read and agree to the Terms and Conditions.")
   } else {
