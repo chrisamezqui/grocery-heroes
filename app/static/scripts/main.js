@@ -54,6 +54,8 @@ function registrationOnClick(event) {
   event.preventDefault();
   if (this.elements[0].value === 0) {
     alert("Please enter your phone number before clicking submit.");
+  } else if(!document.getElementById('agree').checked) {
+    alert("Please indicate that you have read and agree to the Terms and Conditions.")
   } else {
     useGeolocationPosition(sendRegistrationData, showError, {enableHighAccuracy : true});
   }
