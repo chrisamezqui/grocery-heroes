@@ -61,7 +61,7 @@ def helper():
 
     context = {
         'gmapi_key' : GOOGLE_MAPS_API_KEY,
-        'scramble_radius' : SCRAMBLE_RADIUS
+        'scramble_radius_meters' : SCRAMBLE_RADIUS_METERS
     }
     return render_template('helper.html', **context)
 
