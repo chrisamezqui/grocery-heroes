@@ -219,7 +219,7 @@ function initModal() {
 
 function showMap(event) {
   event.preventDefault();
-  if(!.elements[0].checked) {
+  if(!this.elements[0].checked) {
     alert("Please indicate that you have read and agree to the Terms and Conditions.")
   } else {
     document.getElementById("tncMapForm").style.display = "none";
@@ -236,5 +236,5 @@ function initHelpeePage(options) {
 function initHelperPage(options) {
   config=options;
   initModal();
-  document.getElementById(" tncMapForm ").addEventListener("submit", showMap);
+  document.getElementById(" tncMapForm ").addEventListener( "submit ", showMap);
 }
