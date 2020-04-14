@@ -63,10 +63,10 @@ function registrationOnClick(event) {
 function getInfoWindowDefaultContent(phone) {
   return '<div style="color:black" id="helperNotification">'+
              '<h2>Interested in helping out?</h2>'+
-             '<p><b>Phone Number:</b><br>' + phone +
+             '<p><b>Phone Number:</b>' + phone +
              '<br>If a request has been '+
              'completed: Click "Clear Request".</p>'+
-             '<button style="margin-left:34px" id="doneButton">Clear Request</button> </div>';
+             '<div align="middle"><button id="doneButton">Clear Request</button></div></div>';
 }
 
 function centerMap(position) {
@@ -82,8 +82,8 @@ function initConfirmationWindow(event) {
   let contentString = '<div style="color:black" id="helperNotification">'+
                       '<h2>Thank you for your help!</h2>'+
                       '<p>Cick "Undo" if this was a mistake or click "Continue" '+
-                      ' to confirm. </p><button id="undoButton">Undo</button>' +
-                      '  <button id="confirmButton">Confirm</button></div>';
+                      ' to confirm. <div align="left"></p><button id="undoButton">Undo</button></div>' +
+                      '<div align="right"><button id="confirmButton">Confirm</button></div></div>';
   infoWindow.setContent(contentString);
 }
 
@@ -219,7 +219,6 @@ function initModal() {
 
 function showMap(event) {
   event.preventDefault();
-  console.log("uwu");
   if(!this.elements[0].checked) {
     alert("Please indicate that you have read and agree to the Terms and Conditions.")
   } else {
