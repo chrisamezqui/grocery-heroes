@@ -7382,7 +7382,8 @@ span.rev {
   direction: rtl;
 }
 
-#registrationSubmit
+#registrationSubmit,
+#tncAccept
 {
   color:black;
   border: none;
@@ -7393,7 +7394,8 @@ span.rev {
   padding: 6px 30px;
 
 }
-#registrationSubmit:hover
+#registrationSubmit:hover,
+#tncAccept:hover
 {
   background-color: #4CAF50;
    color: white;
