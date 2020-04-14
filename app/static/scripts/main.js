@@ -23,7 +23,6 @@ function sendRegistrationData(position) {
   formdata.append("latitude", latitude);
   let xmlhttp = getHttpConnection();
   xmlhttp.open( "POST", config.helpeeEndpoint);
-  console.log(config.helpeeEndpoint);
   xmlhttp.send(formdata);
 
   document.getElementById("registrationBody").innerHTML = '<h2> <div>Thank you for '+
@@ -52,6 +51,9 @@ function showError(error) {
 
 function registrationOnClick(event) {
   event.preventDefault();
+  console.log(this.elements);
+  console.log(this.elements[0].value);
+  console.log(this.elements[1].value);
   if (this.elements[0].value === 0) {
     alert("Please enter your phone number before clicking submit.");
   } else if(!document.getElementById('agree').checked) {
