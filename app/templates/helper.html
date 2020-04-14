@@ -212,8 +212,7 @@
       var config = {
         requestsEndpoint : "{{ url_for('main.requests') }}",
         helperEndpoint : "{{ url_for('main.helper') }}",
-        scrambleRadiusMeters : {{ scramble_radius_meters }},
-        iconURL : "{{ url_for('static', filename='imgs/allosaurus.png')}}"
+        scrambleRadiusMeters : {{ scramble_radius_meters }}
       };
       initHelperPage(config);
     </script>
@@ -222,7 +221,7 @@
     </script>
 
     <!-- map icons -->
-    <img style="display:none" src="{{ url_for('static', filename='imgs/allosaurus.png') }}">
+    <!-- <img style="display:none" src="{{ url_for('static', filename='imgs/allosaurus.png') }}"> -->
 
 
 </body>

@@ -95,8 +95,6 @@ function removeRequest() {
   mapState.phoneMap.delete(activeMarker);
   activeMarker.setMap(null);
   activeMarker.circle.setMap(null);
-  console.log("PHONE OWO Whats this?");
-  console.log(activeMarker.phone);
 
   //Delete record form database
   let userlng = activeMarker.getPosition().lng();
@@ -157,8 +155,8 @@ function addRequestMarkers(requests) {
       map : map,
       title : 'Somebody could use some help here!',
       phone: request.phone,
-      circle: circle,
-      icon: config.iconURL
+      circle: circle
+      // icon: config.iconURL
     });
 
     marker.addListener('click', function() {
