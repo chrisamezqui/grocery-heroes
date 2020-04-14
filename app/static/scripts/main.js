@@ -224,7 +224,9 @@ function showMap(event) {
     alert("Please indicate that you have read and agree to the Terms and Conditions.")
   } else {
     document.getElementById("tncMapForm").style.display = "none";
-    document.getElementById("map").style.height = "100%";
+    let mapElement = document.getElementById("map");
+    mapElement.style.height = "100%";
+    mapElement.scrollIntoView({behavior : 'smooth'});
   }
 }
 
