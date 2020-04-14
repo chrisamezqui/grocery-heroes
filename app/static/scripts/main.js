@@ -51,16 +51,9 @@ function showError(error) {
 
 function registrationOnClick(event) {
   event.preventDefault();
-  console.log(this.elements);
-  console.log(this.elements[0].value);
-  console.log(this.elements[1].value);
-  console.log(this.elements[2].value);
-  console.log(this.elements[2].checked);
-  console.log(this.elements[0].value === 0);
   if (this.elements[0].value.length === 0) {
-
     alert("Please enter your phone number before clicking submit.");
-  } else if(this.elements[2].value.checked) {
+  } else if(!this.elements[2].value.checked) {
     alert("Please indicate that you have read and agree to the Terms and Conditions.")
   } else {
     useGeolocationPosition(sendRegistrationData, showError, {enableHighAccuracy : true});
@@ -194,6 +187,29 @@ function initMap() {
     xmlhttp.send();
 
     initInfoWindow();
+}
+
+function initModal() {
+  let modal = document.getElementById("modal");
+  let btn = document.getElementById("tnc");
+  let span = document.getElementsByClassName("close")[0];
+
+  // When the user clicks the button, open the modal
+  btn.onclick = function() {
+    modal.style.display = "block";
+  }
+
+  // When the user clicks on <span> (x), close the modal
+  span.onclick = function() {
+    modal.style.display = "none";
+  }
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
 }
 
 function initHelpeePage(options) {
