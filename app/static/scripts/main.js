@@ -163,8 +163,7 @@ function addRequestMarkers(requests) {
 
     marker.addListener('click', function() {
       document.getElementById("map").scrollIntoView({behavior : 'smooth'});
-      // map.panTo(this.getPosition());
-      map.panTo(this.center);
+      map.panTo(this.getPosition());
       mapState.activeMarker = this;
       let contentString = getInfoWindowDefaultContent(mapState.phoneMap.get(this));
       infoWindow.setContent(contentString);
