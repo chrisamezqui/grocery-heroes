@@ -192,17 +192,19 @@ function initMap() {
 function initModal() {
   let modal = document.getElementById("modal");
   let btn = document.getElementById("tnc");
-  let span = document.getElementsByClassName("close")[0];
+  let closers = document.getElementsByClassName("close");
 
-  // When the user clicks the button, open the modal
   btn.onclick = function() {
     modal.style.display = "block";
   }
 
-  // When the user clicks on <span> (x), close the modal
-  span.onclick = function() {
-    modal.style.display = "none";
+  for (let i = 0; i < closers.length; i++) {
+    let closer = closers[i];
+    closer.onclick = function() {
+      modal.style.display = "none";
+    }
   }
+
 
   // When the user clicks anywhere outside of the modal, close it
   window.onclick = function(event) {
