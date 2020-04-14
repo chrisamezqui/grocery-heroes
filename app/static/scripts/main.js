@@ -142,10 +142,10 @@ function addRequestMarkers(requests) {
     let request = requests[i];
     let center = {lat : request.latitude, lng : request.longitude};
     let circle = new google.maps.Circle({
-            strokeColor: '#FF0000',
+            strokeColor: '#3366ff',
             strokeOpacity: 0.8,
             strokeWeight: 2,
-            fillColor: '#FF0000',
+            fillColor: '#3366ff',
             fillOpacity: 0.25,
             map: map,
             center: center,
