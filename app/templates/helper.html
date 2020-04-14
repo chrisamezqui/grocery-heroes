@@ -211,7 +211,8 @@
     //todo: turn all this into a template block
       var config = {
         requestsEndpoint : "{{ url_for('main.requests') }}",
-        helperEndpoint : "{{ url_for('main.helper') }}"
+        helperEndpoint : "{{ url_for('main.helper') }}",
+        scrambleRadius : {{ sramble_radius }}
       };
       initHelperPage(config);
     </script>

@@ -60,7 +60,8 @@ def helper():
         return jsonify(success=True), 200
 
     context = {
-        'gmapi_key' : GOOGLE_MAPS_API_KEY
+        'gmapi_key' : GOOGLE_MAPS_API_KEY,
+        'scramble_radius' : SCRAMBLE_RADIUS
     }
     return render_template('helper.html', **context)
 

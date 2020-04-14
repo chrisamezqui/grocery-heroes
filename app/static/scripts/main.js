@@ -134,14 +134,44 @@ function useGeolocationPosition(success, failure, config) {
   }
 }
 
+function measure(lat1, lon1, lat2, lon2){  // generally used geo measurement function
+  let R = 6378.137; // Radius of earth in KM
+  let dLat = lat2 * Math.PI / 180 - lat1 * Math.PI / 180;
+  let dLon = lon2 * Math.PI / 180 - lon1 * Math.PI / 180;
+  let a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+  Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+  Math.sin(dLon/2) * Math.sin(dLon/2);
+  let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  let d = R * c;
+  return d * 1000; // meters
+}
+
+function calculateRadius(radiusDegrees, lat, lng) {
+  let radiusInMeters = measure(lat, lng, lat + Math.sqrt(Math.pow(radiusDegrees, 2) / 2), lng + Math.sqrt(Math.pow(radiusDegrees, 2) / 2));
+  console.log(radiusInMeters, radiusDegrees, lat, lng);
+  return radiusInMeters;
+}
+
 function addRequestMarkers(requests) {
   for (let i = 0; i < requests.length; i++) {
     let request = requests[i];
-    let marker = new google.maps.Marker({
-      position : {lat : request.latitude, lng : request.longitude},
-      map : map,
-      title : 'Somebody could use some help here!'
-    });
+    let marker = new google.maps.Circle({
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: '#FF0000',
+            fillOpacity: 0.25,
+            map: map,
+            center: {lat : request.latitude, lng : request.longitude},
+            radius: calculateRadius(config.srambleRadius, request.latitude, request.longitude)
+          });
+
+
+    // let marker = new google.maps.Marker({
+    //   position : {lat : request.latitude, lng : request.longitude},
+    //   map : map,
+    //   title : 'Somebody could use some help here!'
+    // });
 
     marker.addListener('click', function() {
       document.getElementById("map").scrollIntoView({behavior : 'smooth'});
@@ -152,14 +182,14 @@ function addRequestMarkers(requests) {
       infoWindow.open(map, this);
     });
 
-    marker.setMap(map);
+    // marker.setMap(map);
     mapState.phoneMap.set(marker, request.phone);
   }
 }
 
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
-      center: {lat: -34.397, lng: 150.644},
+      center: {lat: 37.8715, lng: 122.2730},
       zoom: 13
     });
     mapState = {
