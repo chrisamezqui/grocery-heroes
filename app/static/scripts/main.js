@@ -94,6 +94,9 @@ function removeRequest() {
   //update frontend data
   mapState.phoneMap.delete(activeMarker);
   activeMarker.setMap(null);
+  activeMarker.circle.setMap(null);
+  console.log("PHONE OWO Whats this?");
+  console.log(activeMarker.phone);
 
   //Delete record form database
   let userlng = activeMarker.getPosition().lng();
@@ -137,27 +140,31 @@ function useGeolocationPosition(success, failure, config) {
 function addRequestMarkers(requests) {
   for (let i = 0; i < requests.length; i++) {
     let request = requests[i];
-    let marker = new google.maps.Circle({
+    let center = {lat : request.latitude, lng : request.longitude};
+    let circle = new google.maps.Circle({
             strokeColor: '#FF0000',
             strokeOpacity: 0.8,
             strokeWeight: 2,
             fillColor: '#FF0000',
             fillOpacity: 0.25,
             map: map,
-            center: {lat : request.latitude, lng : request.longitude},
+            center: center,
             radius: config.scrambleRadiusMeters
           });
 
 
-    // let marker = new google.maps.Marker({
-    //   position : {lat : request.latitude, lng : request.longitude},
-    //   map : map,
-    //   title : 'Somebody could use some help here!'
-    // });
+    let marker = new google.maps.Marker({
+      position : center,
+      map : map,
+      title : 'Somebody could use some help here!',
+      phone: request.phone,
+      circle: circle
+    });
 
     marker.addListener('click', function() {
       document.getElementById("map").scrollIntoView({behavior : 'smooth'});
-      map.panTo(this.getPosition());
+      // map.panTo(this.getPosition());
+      map.panTo(this.center);
       mapState.activeMarker = this;
       let contentString = getInfoWindowDefaultContent(mapState.phoneMap.get(this));
       infoWindow.setContent(contentString);
