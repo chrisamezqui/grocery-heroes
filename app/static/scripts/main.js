@@ -82,8 +82,8 @@ function initConfirmationWindow(event) {
   let contentString = '<div style="color:black" id="helperNotification">'+
                       '<h2>Thank you for your help!</h2>'+
                       '<p>Cick "Undo" if this was a mistake or click "Continue" '+
-                      ' to confirm. <div align="left"></p><button id="undoButton">Undo</button></div>' +
-                      '<div align="right"><button id="confirmButton">Confirm</button></div></div>';
+                      ' to confirm.</p><button align="left" id="undoButton">Undo</button>' +
+                      '<button align="right" id="confirmButton">Confirm</button></div>';
   infoWindow.setContent(contentString);
 }
 
