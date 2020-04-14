@@ -7383,7 +7383,8 @@ span.rev {
 }
 
 #registrationSubmit,
-#tncAccept
+#tncAccept,
+#showMap
 {
   color:black;
   border: none;
@@ -7395,12 +7396,12 @@ span.rev {
 
 }
 #registrationSubmit:hover,
-#tncAccept:hover
+#tncAccept:hover,
+#showMap:hover
 {
   background-color: #4CAF50;
    color: white;
  }
-
 
 /* The Modal (background) */
 .modal {
