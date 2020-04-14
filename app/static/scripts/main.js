@@ -57,7 +57,7 @@ function registrationOnClick(event) {
   console.log(this.elements[2].value);
   console.log(this.elements[2].checked);
   console.log(this.elements[0].value === 0);
-  if (this.elements[0].value === 0) {
+  if (this.elements[0].value.length === 0) {
 
     alert("Please enter your phone number before clicking submit.");
   } else if(this.elements[2].value.checked) {
